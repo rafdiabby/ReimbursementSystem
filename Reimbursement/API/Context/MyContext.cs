@@ -21,7 +21,6 @@ namespace API.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<StatusHistory> StatusHistories { get; set; }
-        public DbSet<ReimbursementHistory> ReimbursementHistories { get; set; }
 
         //define relations here using modelbuilder
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,22 +59,15 @@ namespace API.Context
             //reimbursement statushistory
             modelBuilder.Entity<Reimbursement>()
                 .HasMany(b => b.StatusHistories)
-                .WithOne(a => a.Reimbursement);
+                .WithOne(a => a.Reimbursement)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //reimbursement reimbursementhistory
-            modelBuilder.Entity<Reimbursement>()
-                .HasMany(b => b.ReimbursementHistories)
-                .WithOne(a => a.Reimbursement);
 
             //status statushistory
             modelBuilder.Entity<Status>()
                 .HasMany(b => b.StatusHistories)
                 .WithOne(a => a.Status);
 
-            //status reimbursementhistory
-            modelBuilder.Entity<Status>()
-                .HasMany(b => b.ReimbursementHistories)
-                .WithOne(a => a.Status);
         }
     }
 }

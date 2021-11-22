@@ -28,7 +28,6 @@ namespace API.Models
         public virtual Category Category { get; set; }
         [ForeignKey("statusId")]
         public virtual Status Status { get; set; }
-        public virtual ICollection<ReimbursementHistory> ReimbursementHistories { get; set; }
         public virtual ICollection<StatusHistory> StatusHistories { get; set; }
     }
 }

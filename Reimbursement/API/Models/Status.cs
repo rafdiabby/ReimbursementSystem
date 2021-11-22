@@ -17,6 +17,5 @@ namespace API.Models
         //relations
         public virtual ICollection<Reimbursement> Reimbursements { get; set; }
         public virtual ICollection<StatusHistory> StatusHistories { get; set; }
-        public virtual ICollection<ReimbursementHistory> ReimbursementHistories { get; set; }
     }
 }
