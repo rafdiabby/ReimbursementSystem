@@ -12,9 +12,9 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusHistorysController : BaseController<StatusHistory, StatusHistoryRepository, int>
+    public class StatusHistoriesController : BaseController<StatusHistory, StatusHistoryRepository, int>
     {
-        public StatusHistorysController(StatusHistoryRepository statusHistoryRepository) : base(statusHistoryRepository)
+        public StatusHistoriesController(StatusHistoryRepository statusHistoryRepository) : base(statusHistoryRepository)
         {
 
         }
