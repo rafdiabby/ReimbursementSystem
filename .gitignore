@@ -3,3 +3,5 @@ Reimbursement/API/obj/
 Reimbursement/.vs/
 Reimbursement/API/bin
 Reimbursement/API/Migrations
+Reimbursement/API/API.csproj
+Reimbursement/API/appsettings.json
