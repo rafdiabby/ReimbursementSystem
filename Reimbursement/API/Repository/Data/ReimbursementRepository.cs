@@ -1,6 +1,7 @@
 ﻿using API.Context;
 using API.Models;
 using API.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,17 @@ namespace API.Repository.Data
                            statusDetails = r.statusDetails
                        };
             return (IEnumerable<RequestReim>)data.ToList();
+        }
+
+        public int UpdateStatus(Reimbursement reimbursement)
+        {
+            var checkReimId = context.Reimbursements.Find(reimbursement.id);
+            checkReimId.Status = reimbursement.Status;
+            checkReimId.statusDetails = reimbursement.statusDetails;
+
+            context.Entry(checkReimId).State = EntityState.Modified;
+            var result = context.SaveChanges();
+            return result ;
         }
     }
 }
