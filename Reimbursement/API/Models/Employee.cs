@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,9 @@ namespace API.Models
         public Gender gender { get; set; }
 
         //define relations
+        [JsonIgnore]
         public virtual Account Account { get; set; } //one to one
+        [JsonIgnore]
         public virtual ICollection<Reimbursement> Reimbursements { get; set; }
     }
 
