@@ -1,0 +1,21 @@
+﻿using System;
+
+namespace API.ViewModels
+{
+    public class RequestReim
+    {
+        public int reimId { get; set; }
+        public string NIK { get; set; }
+        public string fullName { get; set; }
+        public int phone { get; set; }
+        public DateTime date { get; set; }
+        public int amount { get; set; }
+        public string description  { get; set; }
+        public string receipt { get; set; }
+        public string category { get; set; }
+        public string status { get; set; }
+        public string statusDetails { get; set; }
+
+
+    }
+}

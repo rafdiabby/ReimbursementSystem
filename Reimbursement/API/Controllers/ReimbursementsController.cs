@@ -14,9 +14,49 @@ namespace API.Controllers
     [ApiController]
     public class ReimbursementsController : BaseController<Reimbursement, ReimbursementRepository, int>
     {
+        private readonly ReimbursementRepository reimbursementRepository;
         public ReimbursementsController(ReimbursementRepository reimbursementRepository) : base(reimbursementRepository)
         {
+            this.reimbursementRepository = reimbursementRepository;
+        }
 
+        [Route("GetAll")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var data = reimbursementRepository.ReimData();
+            if (data.Count() == 0)
+            {
+                return Ok(new { message = "Can't find data" });
+            }
+            else
+            {
+            return Ok(data);
+            }
+            
+        }
+
+        [Route("GetAll/{NIK}")]
+        [HttpGet]
+        public IActionResult GetBy(string NIK)
+        {
+            var data = reimbursementRepository.ReimDataBy(NIK);
+            if (data.Count() == 0)
+            {
+                return Ok(new { message = "Can't find data" });
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [Route("UpdateStatus")]
+        [HttpPatch]
+        public IActionResult UpdateStatus(Reimbursement reimbursement)
+        {
+            var result = reimbursementRepository.UpdateStatus(reimbursement);
+            return Ok(result);
         }
     }
 }
