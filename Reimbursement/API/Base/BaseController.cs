@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interface;
+using API.ViewModels;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace API.Base
             }
             else
             {
-                return NotFound(new { status = HttpStatusCode.NotFound, Messege = "Data tidak ada !!!" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "Data tidak ada !!!" });
             }
         }
 
@@ -47,7 +48,7 @@ namespace API.Base
             }
             else
             {
-                return NotFound(new { Status = HttpStatusCode.NotFound, messege = "Data Tidak ada !!!" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "Data Tidak ada !!!" });
             }
         }
 
@@ -57,11 +58,11 @@ namespace API.Base
             try
             {
                 var cek = repository.Insert(entity);
-                return Ok(new { status = HttpStatusCode.OK, messege = $"Berhasil Tambah data" });
+                return Ok(new ResultVM { Status = HttpStatusCode.OK.ToString(), Pesan = $"Berhasil Tambah data" });
             }
             catch(Exception)
             {
-                return NotFound(new { status = HttpStatusCode.NotFound, messege = $"Gagal Tambah data" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = $"Gagal Tambah data" });
             }
         }
 
@@ -71,11 +72,11 @@ namespace API.Base
             try
             {
                 var result = repository.Update(entity, key);
-                return Ok(new { status = HttpStatusCode.OK, message = $"Berhasil Update Key : {key} "});
+                return Ok(new ResultVM { Status = HttpStatusCode.OK.ToString(), Pesan = $"Berhasil Update Key : {key} "});
             }
             catch (Exception)
             {
-                return NotFound(new { status = HttpStatusCode.NotFound, messege = "Gagal Data Tidak Ditemukan" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "Gagal Data Tidak Ditemukan" });
             }
         }
 
@@ -85,11 +86,11 @@ namespace API.Base
             try
             {
                 repository.Delete(key);
-                return Ok(new { status = HttpStatusCode.OK, message = $"Berhasil Menghapus Key : {key} " });
+                return Ok(new ResultVM { Status = HttpStatusCode.OK.ToString(), Pesan = $"Berhasil Menghapus Key : {key} " });
             }
             catch (ArgumentNullException)
             {
-                return NotFound(new { status = HttpStatusCode.NotFound, message = $"Gagal Menghapus Key : {key} data tidak ditemukan" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = $"Gagal Menghapus Key : {key} data tidak ditemukan" });
             }
         }
     }
