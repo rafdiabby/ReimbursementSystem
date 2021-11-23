@@ -36,10 +36,12 @@ namespace API.Controllers
             var cek = loginRepository.Sign(loginVM);
             if (cek == 2)
             {
+                //email tidak terdaftar
                 return NotFound(new JWTokenVM { Token = "", Messages = "0" });
             }
             if (cek == 0)
             {
+                //password salah
                 return NotFound(new JWTokenVM { Token = "", Messages = "1" });
             }
             else
