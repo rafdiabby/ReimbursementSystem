@@ -65,7 +65,7 @@ namespace API.Repository.Data
 
                        from c in table1
                        where e.NIK == NIK
-                       select new
+                       select new RequestReim
                        {
                            reimId = r.id,
                            NIK = e.NIK,
@@ -79,7 +79,7 @@ namespace API.Repository.Data
                            status = s.statusName,
                            statusDetails = r.statusDetails
                        };
-            return (IEnumerable<RequestReim>)data.ToList();
+            return data.ToList();
         }
 
         public int UpdateStatus(Reimbursement reimbursement)

@@ -39,7 +39,7 @@ namespace API.Controllers
 
         [Route("GetAll/{NIK}")]
         [HttpGet]
-        public IActionResult GetBy(string NIK)
+        public ActionResult<RequestReim> GetBy(string NIK)
         {
             var data = reimbursementRepository.ReimDataBy(NIK);
             if (data.Count() == 0)

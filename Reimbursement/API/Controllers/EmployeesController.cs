@@ -67,7 +67,7 @@ namespace API.Controllers
         //[Route("Profile/{nik}")]
         //[HttpGet("{nik}")]
         [HttpGet]
-        [Route("Search")]
+        [Route("Profile/{NIK}")]
         public ActionResult<ProfilVM> GetProfile(string NIK)
         {
             var result = employeeRepository.GetProfile(NIK);
