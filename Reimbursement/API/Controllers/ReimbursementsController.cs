@@ -1,6 +1,7 @@
 ﻿using API.Base;
 using API.Models;
 using API.Repository.Data;
+using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,7 @@ namespace API.Controllers
 
         [Route("GetAll")]
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<RequestReim> GetAll()
         {
             var data = reimbursementRepository.ReimData();
             if (data.Count() == 0)
@@ -38,7 +39,7 @@ namespace API.Controllers
 
         [Route("GetAll/{NIK}")]
         [HttpGet]
-        public IActionResult GetBy(string NIK)
+        public ActionResult<RequestReim> GetBy(string NIK)
         {
             var data = reimbursementRepository.ReimDataBy(NIK);
             if (data.Count() == 0)
