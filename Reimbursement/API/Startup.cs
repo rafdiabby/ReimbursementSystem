@@ -1,6 +1,8 @@
 using API.Context;
 using API.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using API.Services;
+using API.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -46,7 +48,6 @@ namespace API
 
             services.AddDbContext<MyContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("APIContext")));
-
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
@@ -71,7 +72,9 @@ namespace API
                     ClockSkew = TimeSpan.Zero
                 };
             });
-        }
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailServices>();
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

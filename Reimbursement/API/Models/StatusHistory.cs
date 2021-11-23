@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,8 +20,10 @@ namespace API.Models
         public DateTime date { get; set; }
 
         //relations
+        [JsonIgnore]
         [ForeignKey("reimId")]
         public virtual Reimbursement Reimbursement { get; set; }
+        [JsonIgnore]
         [ForeignKey("statusId")]
         public virtual Status Status { get; set; }
 
