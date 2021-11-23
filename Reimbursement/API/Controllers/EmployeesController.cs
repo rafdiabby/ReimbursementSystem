@@ -4,6 +4,7 @@ using API.Repository.Data;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace API.Controllers
         //[Route("Profile/{nik}")]
         //[HttpGet("{nik}")]
         [HttpGet]
-        [Route("Search")]
+        [Route("Profile/{NIK}")]
         public ActionResult<ProfilVM> GetProfile(string NIK)
         {
             var result = employeeRepository.GetProfile(NIK);
