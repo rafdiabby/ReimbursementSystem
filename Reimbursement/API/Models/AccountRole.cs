@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,8 +17,10 @@ namespace API.Models
         public int roleId { get; set; }
 
         //define relations
+        [JsonIgnore]
         [ForeignKey("NIK")]
         public virtual Account Account { get; set; }
+        [JsonIgnore]
         [ForeignKey("roleId")]
         public virtual Role Role { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,12 +23,16 @@ namespace API.Models
         public int statusId { get; set; }
 
         //relations
+        [JsonIgnore]
         [ForeignKey("NIK")]
         public virtual Employee Employee { get; set; }
+        [JsonIgnore]
         [ForeignKey("categoryId")]
         public virtual Category Category { get; set; }
+        [JsonIgnore]
         [ForeignKey("statusId")]
         public virtual Status Status { get; set; }
+        [JsonIgnore]
         public virtual ICollection<StatusHistory> StatusHistories { get; set; }
     }
 }

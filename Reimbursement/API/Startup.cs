@@ -1,5 +1,7 @@
 using API.Context;
 using API.Repository.Data;
+using API.Services;
+using API.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +44,8 @@ namespace API
 
             services.AddDbContext<MyContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("APIContext")));
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

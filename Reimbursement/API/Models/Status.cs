@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,9 @@ namespace API.Models
         public string statusName { get; set; }
 
         //relations
+        [JsonIgnore]
         public virtual ICollection<Reimbursement> Reimbursements { get; set; }
+        [JsonIgnore]
         public virtual ICollection<StatusHistory> StatusHistories { get; set; }
     }
 }
