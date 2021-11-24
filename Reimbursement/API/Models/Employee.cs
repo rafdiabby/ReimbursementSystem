@@ -16,7 +16,7 @@ namespace API.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public int bankAccount { get; set; }
         public Gender gender { get; set; }
 
