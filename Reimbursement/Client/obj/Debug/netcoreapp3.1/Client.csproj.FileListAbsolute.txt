@@ -94,3 +94,4 @@ E:\MCC\Project Tugas\ReimbursementSystem\Reimbursement\Client\bin\Debug\netcorea
 E:\MCC\Project Tugas\ReimbursementSystem\Reimbursement\Client\bin\Debug\netcoreapp3.1\API.dll
 E:\MCC\Project Tugas\ReimbursementSystem\Reimbursement\Client\bin\Debug\netcoreapp3.1\API.pdb
 E:\MCC\Project Tugas\ReimbursementSystem\Reimbursement\Client\obj\Debug\netcoreapp3.1\Client.MvcApplicationPartsAssemblyInfo.cs
+E:\MCC\Project Tugas\ReimbursementSystem\Reimbursement\Client\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
