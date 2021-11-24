@@ -17,7 +17,7 @@ namespace API.Repository.Data
             this.context = myContext;
         }
 
-        public IEnumerable<RequestReim> ReimData()
+        public IEnumerable<ReimDataVM> ReimData()
         {
             var employeeData = context.Employees.ToList();
             var reimData = context.Reimbursements.ToList();
@@ -32,7 +32,7 @@ namespace API.Repository.Data
                        join c in categoryData on r.categoryId equals c.id into table1
 
                        from c in table1
-                       select new RequestReim
+                       select new ReimDataVM
                        {
                            reimId = r.id,
                            NIK = e.NIK,
@@ -49,7 +49,7 @@ namespace API.Repository.Data
             return data.ToList();
         }
 
-        public IEnumerable<RequestReim> ReimDataBy(string NIK)
+        public IEnumerable<ReimDataVM> ReimDataBy(string NIK)
         {
             var employeeData = context.Employees.ToList();
             var reimData = context.Reimbursements.ToList();
@@ -65,7 +65,7 @@ namespace API.Repository.Data
 
                        from c in table1
                        where e.NIK == NIK
-                       select new RequestReim
+                       select new ReimDataVM
                        {
                            reimId = r.id,
                            NIK = e.NIK,
