@@ -10,7 +10,7 @@ namespace API.ViewModels
         public string NIK { get; set; }
         public string fullName { get; set; }
         public string email { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public int bankAccount { get; set; }
         public Gender gender { get; set; }
         public string roleName { get; set; }
