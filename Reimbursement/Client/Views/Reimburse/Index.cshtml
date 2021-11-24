@@ -2,62 +2,59 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
 }
+<div class="page-inner">
 
-Hello
-@model CreatePost
-<form asp-action="Create" enctype="multipart/form-data">
-
-    <input asp-for="ImageCaption" />
-    <input asp-for="ImageDescription" />
-    <input class="form-control" asp-for="MyImage" />
-
-    <input type="submit" />
-</form>
-
-<div id="registerForm container" class="modal-body">
-    <form id="register" class="needs-validation user" name="register" novalidate>
-        <div class="form-group" hidden>
-            <label for="isEdit">Is Edit?</label>
-            <input type="text" class="form-control" id="isEdit">
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Request Reimbursement</div>
+    </div>
+    <div class="card-body">
+        <div id="registerForm container" class="modal-body">
+            <form id="register" class="needs-validation user" name="register" novalidate>
+                <div class="form-group" hidden>
+                    <label for="isEdit">Is Edit?</label>
+                    <input type="text" class="form-control" id="isEdit">
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        @* isinya kolom pertama *@
+                        <div class="form-group">
+                            <label for="inputNIK">NIK</label>
+                            <input type="text" class="form-control" id="inputNIK" name="nik" placeholder="MCCxxxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCategory">Category</label>
+                            <select class="form-control" id="inputCategory" name="categoryId" required>
+                                <option value="">Select one</option>
+                                <option value="1">Airplane Ticket</option>
+                                <option value="2">Land Transport</option>
+                                <option value="3">Airplane and Land Transport</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDesc">Descriptions</label>
+                            <input type="text" class="form-control" id="inputDesc" name="desc" placeholder="Write description here" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDesc">Descriptions</label>
+                            <input type="text" class="form-control" id="inputDesc" name="desc" placeholder="Write description here" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAmount">Amount to be reimbursed</label>
+                            <input type="number" class="form-control" id="inputAmount" name="Amount" placeholder="Rp.xxx.xxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputReceipt">Transaction Receipt</label>
+                            <input type="file" class="form-control" id="inputReceipt" name="receipt" placeholder="Write description here" required multiple>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-sm">
-                @* isinya kolom pertama *@
-                <div class="form-group">
-                    <label for="inputNIK">NIK</label>
-                    <input type="text" class="form-control" id="inputNIK" name="nik" placeholder="MCCxxxx" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputCategory">Category</label>
-                    <select class="form-control" id="inputCategory" name="categoryId" required>
-                        <option value="">Select one</option>
-                        <option value="1">Airplane Ticket</option>
-                        <option value="2">Land Transport</option>
-                        <option value="3">Airplane and Land Transport</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="inputDesc">Descriptions</label>
-                    <input type="text" class="form-control" id="inputDesc" name="desc" placeholder="Write description here" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputDesc">Descriptions</label>
-                    <input type="text" class="form-control" id="inputDesc" name="desc" placeholder="Write description here" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputAmount">Amount to be reimbursed</label>
-                    <input type="number" class="form-control" id="inputAmount" name="Amount" placeholder="Rp.xxx.xxx" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputReceipt">Transaction Receipt</label>
-                    <input type="file" class="form-control" id="inputReceipt" name="receipt" placeholder="Write description here" required multiple>
-                </div>
-            </div>
-        </div>
-    </form>
-
+    </div>
+    <div class="card-action">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="submitEmployee();">Submit request</button>
+    </div>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-primary" onclick="submitEmployee();">Submit request</button>
 </div>
