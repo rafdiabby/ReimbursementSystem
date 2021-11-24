@@ -23,7 +23,7 @@ namespace API.Controllers
 
         [Route("GetAll")]
         [HttpGet]
-        public ActionResult<RequestReim> GetAll()
+        public ActionResult<ReimDataVM> GetAll()
         {
             var data = reimbursementRepository.ReimData();
             if (data.Count() == 0)
@@ -39,7 +39,7 @@ namespace API.Controllers
 
         [Route("GetAll/{NIK}")]
         [HttpGet]
-        public ActionResult<RequestReim> GetBy(string NIK)
+        public ActionResult<ReimDataVM> GetBy(string NIK)
         {
             var data = reimbursementRepository.ReimDataBy(NIK);
             if (data.Count() == 0)

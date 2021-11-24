@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace API.ViewModels
 {
-    public class RequestReim
+    public class RequestReimVM
     {
         public int reimId { get; set; }
         public string NIK { get; set; }
@@ -15,6 +16,7 @@ namespace API.ViewModels
         public string category { get; set; }
         public string status { get; set; }
         public string statusDetails { get; set; }
+        public IFormFile receiptFile { get; set; }
 
 
     }
