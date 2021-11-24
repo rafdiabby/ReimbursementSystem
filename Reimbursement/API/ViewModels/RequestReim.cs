@@ -7,7 +7,7 @@ namespace API.ViewModels
         public int reimId { get; set; }
         public string NIK { get; set; }
         public string fullName { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public DateTime date { get; set; }
         public int amount { get; set; }
         public string description  { get; set; }

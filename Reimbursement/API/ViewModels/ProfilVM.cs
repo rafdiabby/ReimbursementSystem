@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace API.ViewModels
 {
@@ -10,8 +13,9 @@ namespace API.ViewModels
         public string NIK { get; set; }
         public string fullName { get; set; }
         public string email { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public int bankAccount { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Gender gender { get; set; }
         public string roleName { get; set; }
     }
