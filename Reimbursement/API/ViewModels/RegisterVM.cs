@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models;
 
 namespace API.ViewModels
 {
@@ -17,6 +18,4 @@ namespace API.ViewModels
         public string Password { get; set; }
         public int roleId { get; set; }
     }
-    public enum Gender
-    { Male, Female }
 }

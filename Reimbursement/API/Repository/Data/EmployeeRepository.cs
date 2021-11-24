@@ -99,7 +99,7 @@ namespace API.Repository.Data
                             fullName = $"{em.firstName} {em.lastName}",
                             phone = em.phone,
                             email = em.email,
-                            gender = (ViewModels.Gender)em.gender,
+                            gender = em.gender,
                             roleName = role.roleName,
                         });
             return join.ToList();
@@ -120,7 +120,7 @@ namespace API.Repository.Data
                             fullName = $"{em.firstName} {em.lastName}",
                             phone = em.phone,
                             email = em.email,
-                            gender = (ViewModels.Gender)em.gender,
+                            gender = em.gender,
                             roleName = role.roleName,
                         }).Where(em => em.NIK == NIK).ToList();
             return profile;
