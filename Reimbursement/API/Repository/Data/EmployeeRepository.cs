@@ -125,5 +125,21 @@ namespace API.Repository.Data
                         }).Where(em => em.NIK == NIK).ToList();
             return profile;
         }
+
+        public int Hapus(string NIK)
+        {
+            var acr = myContext.AccountRoles.Where(a => a.NIK == NIK).ToList();
+            foreach(var ac in acr)
+            {
+                var hapusAccoutRole = myContext.AccountRoles.Find(ac.accountRoleId);
+                myContext.Remove(hapusAccoutRole);
+                myContext.SaveChanges();
+            }            
+
+            var entity = myContext.Employees.Find(NIK);
+            myContext.Remove(entity);
+            var result = myContext.SaveChanges();
+            return result;
+        }
     }
 }

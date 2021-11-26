@@ -85,7 +85,7 @@
                                         <div class="notif-center">
                                             <a href="#">
                                                 <div class="notif-img">
-                                                    <img src="../assets/img/jm_denis.jpg" alt="Img Profile">
+                                                    <img src="~/Admin/assets/img/jm_denis.jpg" alt="Img Profile">
                                                 </div>
                                                 <div class="notif-content">
                                                     <span class="subject">Jimmy Denis</span>
@@ -97,7 +97,7 @@
                                             </a>
                                             <a href="#">
                                                 <div class="notif-img">
-                                                    <img src="../assets/img/chadengle.jpg" alt="Img Profile">
+                                                    <img src="~/Admin/assets/img/chadengle.jpg" alt="Img Profile">
                                                 </div>
                                                 <div class="notif-content">
                                                     <span class="subject">Chad</span>
@@ -109,7 +109,7 @@
                                             </a>
                                             <a href="#">
                                                 <div class="notif-img">
-                                                    <img src="../assets/img/mlane.jpg" alt="Img Profile">
+                                                    <img src="~/Admin/assets/img/mlane.jpg" alt="Img Profile">
                                                 </div>
                                                 <div class="notif-content">
                                                     <span class="subject">Jhon Doe</span>
@@ -121,7 +121,7 @@
                                             </a>
                                             <a href="#">
                                                 <div class="notif-img">
-                                                    <img src="../assets/img/talha.jpg" alt="Img Profile">
+                                                    <img src="~/Admin/assets/img/talha.jpg" alt="Img Profile">
                                                 </div>
                                                 <div class="notif-content">
                                                     <span class="subject">Talha</span>
@@ -171,7 +171,7 @@
                                             </a>
                                             <a href="#">
                                                 <div class="notif-img">
-                                                    <img src="../assets/img/profile2.jpg" alt="Img Profile">
+                                                    <img src="~/Admin/assets/img/profile2.jpg" alt="Img Profile">
                                                 </div>
                                                 <div class="notif-content">
                                                     <span class="block">
@@ -308,15 +308,15 @@
                             <h4 class="text-section">Components</h4>
                         </li>
                         <li class="nav-item">
-                            <a >
+                            <a asp-area="" asp-controller="Reimburse" asp-action="Index">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Request Reimbursement</p>
                             </a>
                             <a asp-area="" asp-controller="Employees" asp-action="Index">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-users-cog"></i>
                                 <p>Employee</p>
                             </a>
-                            <a >
+                            <a>
                                 <i class="fas fa-layer-group"></i>
                                 <p>Reimbursement Approval</p>
                             </a>
@@ -395,9 +395,11 @@
     <!-- Atlantis JS -->
     <script src="~/Admin/assets/js/atlantis.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     @*<script src="~/Admin/assets/js/setting-demo.js"></script>
-    <script src="~/Admin/assets/js/demo.js"></script>*@
+        <script src="~/Admin/assets/js/demo.js"></script>*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>

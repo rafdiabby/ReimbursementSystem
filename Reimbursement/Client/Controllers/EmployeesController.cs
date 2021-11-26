@@ -1,5 +1,4 @@
 ﻿using API.Models;
-using API.Viewmodels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +24,16 @@ namespace Client.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<JsonResult> Register(RegisterVM register)
+        {
+            var result = await repository.Register(register);
+            return Json(result);
+        }
+        public JsonResult DeleteEmployees(string id)
+        {
+            var result = repository.DeleteEmployees(id);
+            return Json(result);
         }
     }
 }

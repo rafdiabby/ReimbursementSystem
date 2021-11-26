@@ -15,7 +15,7 @@ using Client.Base.Url;
 using Client.Repository;
 using API.ViewModels;
 
-namespace Client.Repositories.Data
+namespace Client.Repository.Data
 {
     public class EmployeeRepository : GeneralRepository<Employee, string>
     {
@@ -30,6 +30,25 @@ namespace Client.Repositories.Data
             {
                 BaseAddress = new Uri(address.link)
             };
+        }
+
+        public async Task<ResultVM> Register(RegisterVM register)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "Register", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
+
+        public HttpStatusCode DeleteEmployees(string id)
+        {
+            var result = httpClient.DeleteAsync(request + "Hapus?nik=" + id).Result;
+            return result.StatusCode;
         }
     }
 }
