@@ -155,5 +155,21 @@ namespace API.Repository.Data
                            }).Where(em => em.nik == NIK).ToList();
             return profile;
         }
+
+        public int AddAccountRole(AccountRole accountRole)
+        {
+            var cekRole = myContext.AccountRoles.Where(a => (a.NIK == accountRole.NIK)&(a.roleId == accountRole.roleId)).FirstOrDefault();
+            if (cekRole != null)
+            {
+                //Jika nik sama
+                return 2;
+            }
+            else
+            {
+                myContext.AccountRoles.Add(accountRole);
+                var result = myContext.SaveChanges();
+                return result;
+            }
+        }
     }
 }

@@ -108,5 +108,21 @@ namespace API.Controllers
             var result = employeeRepository.GetRole(NIK);
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("AddAccountRole")]
+        public ActionResult AddAccountRole(AccountRole accountRole)
+        {
+            var cek = employeeRepository.AddAccountRole(accountRole);
+            if (cek == 1)
+            {
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+            else
+            {
+                //Phone
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "2" });
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@
             {
                 "data": "",
                 "render": function (data, type, row, meta) {
-                    var btn = '<div class="form-button-action"> <button type="button" onclick="GetRole(' + row['nik'] + ');" id="btnAddRole" data-toggle="modal" data-target="#addRole" data-tooltip="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Add Role"> <i class="fa fa-plus"></i> </button> <button type="button" data-toggle="modal" data-target="#editData" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Data"> <i class="fa fa-edit"></i> </button> <button type="button" onclick="Delete(' + row['nik'] + ');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div>';
+                    var btn = '<div class="form-button-action"> <button type="button" onclick="GetRole(' + row['nik'] + ');" id="btnAddRole" data-toggle="modal" data-target="#addRole" data-tooltip="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Add Role"> <i class="fa fa-plus"></i> </button> <button type="button" data-toggle="modal" data-target="#editData" onclick="Get(' + row['nik'] + ');" id="btnEdit" data-tooltip="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Data"> <i class="fa fa-edit"></i> </button> <button type="button" onclick="Delete(' + row['nik'] + ');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div>';
                     return btn;
                 }
             }
@@ -152,17 +152,25 @@
             $('#roles').html(role);
         }
     })
+
+    $('#btnAddRole').click(function (e) {
+        AddAccountRole();
+    })
+
+    $('#btnEditData').click(function (e) {
+        Edit();
+    })
 });
 
 
-
-
 function GetRole(id) {
+
+    $('#nikRole').val(id);
+
     $.ajax({
         url: "/Employees/GetRole/" + id,
         success: function (hasil) {
 
-            console.log(hasil);
             var dataRole = [];
 
             $.each(hasil, function (key, val) {
@@ -170,7 +178,7 @@ function GetRole(id) {
                                 <td>${key + 1}</td>
                                 <td>${val.roleName}</td>
                                 <td>
-                                    <button type="button" data-tooltip="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                    <button type="button" onclick="DeleteRole(${val.accountRoleid});" id="btnDeletRole" data-tooltip="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </td>
@@ -179,6 +187,106 @@ function GetRole(id) {
             });
         }
     })
+}
+
+function AddAccountRole() {
+
+    var obj = new Object();
+
+    obj.nik = $("#nikRole").val();
+    obj.roleId = $("#roles").val();
+
+    $.ajax({
+        url: "/Employees/AddAccountRole",
+        type: 'POST',
+        data: { accountRole: obj },
+        dataType: "json"
+    }).done((result) => {
+        if (result.pesan == "1") {
+            swal("Good job!", "Success Add New Role !!!", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+            $('#EmployeeTable').DataTable().ajax.reload();
+            $("#addRole").modal("hide");
+        } else {
+            swal("ERROR", "Role Sudah Ada !!!", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+            $("#addRole").modal("hide");
+        }
+    }).fail((error) => {
+        console.log(error);
+    })
+}
+
+function DeleteRole(id) {
+
+
+    swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        buttons: {
+            cancel: {
+                visible: true,
+                text: 'No, cancel!',
+                className: 'btn btn-danger'
+            },
+            confirm: {
+                text: 'Yes, delete it!',
+                className: 'btn btn-success'
+            }
+        }
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: "/AccountRoles/Delete/" + id,
+                type: "Delete"
+            }).then((result) => {
+                
+                if (result == 200) {
+                    swal("data has been deleted !!!", {
+                        icon: "success",
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-success'
+                            }
+                        }
+                    });
+                    $("#addRole").modal("hide");
+                    $('#EmployeeTable').DataTable().ajax.reload();
+                } else {
+                    swal("ERROR", "gagal dihapus !!!", {
+                        icon: "error",
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-danger'
+                            }
+                        },
+                    });
+                }
+            })
+
+        } else {
+            swal("Your imaginary file is safe!", {
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                }
+            });
+        }
+    });
 }
 
 function Insert() {
@@ -268,7 +376,7 @@ function Delete(nik) {
                 url: "/Employees/DeleteEmployees/" + nik,
                 type: "Delete"
             }).then((result) => {
-                console.log(result);
+
                 if (result == 200) {
                     swal("data has been deleted !!!", {
                         icon: "success",
@@ -301,4 +409,68 @@ function Delete(nik) {
             });
         }
     });
+}
+
+function Get(nik) {
+
+    $.ajax({
+        url: "/employees/get/" + nik,
+        success: function (result) {
+            
+            $('#enik').val(result.nik);
+            $('#efirstName').val(result.firstName);
+            $('#elastName').val(result.lastName);
+            $('#eemail').val(result.email);
+            $('#ephone').val(result.phone);
+            if (result.gender == 0) {
+                $('#egender').val(0);
+            } else {
+                $('#egender').val(1);
+            }
+            $('#enoRekening').val(result.bankAccount);
+        }
+    })
+}
+
+function Edit() {
+
+    var nik = $("#enik").val();
+
+    var obj = new Object();
+
+    obj.NIK = $("#enik").val();
+    obj.firstName = $("#efirstName").val();
+    obj.lastName = $("#elastName").val();
+    obj.email = $("#eemail").val();
+    obj.phone = $("#ephone").val();
+    obj.gender = $("#egender").val();
+    obj.bankAccount = $("#enoRekening").val();
+
+
+    $.ajax({
+        url: "/Employees/Put/",
+        'type': 'Put',
+        'data': { id: nik, entity: obj },
+        'dataType': 'json'
+    }).done((result) => {
+        swal("Good job!", `You clicked the button! ${result.messege}`, {
+            icon: "success",
+            buttons: {
+                confirm: {
+                    className: 'btn btn-success'
+                }
+            },
+        });
+        $('#EmployeeTable').DataTable().ajax.reload();
+        $("#editData").modal("hide");
+    }).fail((error) => {
+        swal("ERROR", `${error.messege}`, {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    className: 'btn btn-danger'
+                }
+            },
+        });
+    })
 }

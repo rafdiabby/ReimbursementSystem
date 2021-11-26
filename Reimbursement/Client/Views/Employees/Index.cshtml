@@ -199,12 +199,16 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="addRoles" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
-                                                <form>
+                                                <form id="formAddRole">
+                                                    <input hidden type="text" class="form-control" id="nikRole" name="nikRole">
                                                     <div class="form-group form-floating-label">
-                                                        <select id="roles" class="form-control" name="role" required>
+                                                        <select id="roles" class="form-control" name="roles" required>
                                                         </select>
                                                     </div>
                                                 </form>
+                                                <div class="form-group">
+                                                    <button type="button" id="btnAddRole" form="formAddRole" class="btn btn-success">Add Role <i class="fas fa-plus-circle"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +238,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="EmployeeFormEdit">
-                                        <div class="form-group row">
+                                        <div class="form-group row" hidden>
                                             <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="enik" name="enik" placeholder="NIK">
@@ -309,7 +313,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer no-bd">
-                                    <button type="button" id="btnEdit" form="EmployeeFormEdit" class="btn btn-primary"><i class="fa fa-edit"></i> Add</button>
+                                    <button type="button" id="btnEditData" form="EmployeeFormEdit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
                                 </div>
                             </div>

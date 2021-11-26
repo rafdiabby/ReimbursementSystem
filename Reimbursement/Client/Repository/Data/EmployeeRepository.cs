@@ -62,5 +62,18 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+
+        public async Task<ResultVM> AddAccountRole(AccountRole accountRole)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(accountRole), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "AddAccountRole", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

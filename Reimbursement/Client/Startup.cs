@@ -33,6 +33,7 @@ namespace Client
             services.AddScoped<Address>();
             services.AddScoped<LoginRepository>();
             services.AddScoped<RoleRepository>();
+            services.AddScoped<AccountRoleRepository>();
 
             services.AddControllersWithViews();
             services.AddSession();

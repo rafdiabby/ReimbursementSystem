@@ -41,5 +41,11 @@ namespace Client.Controllers
             var result = await repository.GetRole(id);
             return Json(result);
         }
+
+        public async Task<JsonResult> AddAccountRole(AccountRole accountRole)
+        {
+            var result = await repository.AddAccountRole(accountRole);
+            return Json(result);
+        }
     }
 }
