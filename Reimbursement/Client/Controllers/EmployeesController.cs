@@ -35,5 +35,11 @@ namespace Client.Controllers
             var result = repository.DeleteEmployees(id);
             return Json(result);
         }
+
+        public async Task<JsonResult> GetRole(string id)
+        {
+            var result = await repository.GetRole(id);
+            return Json(result);
+        }
     }
 }

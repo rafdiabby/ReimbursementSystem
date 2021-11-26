@@ -50,5 +50,17 @@ namespace Client.Repository.Data
             var result = httpClient.DeleteAsync(request + "Hapus?nik=" + id).Result;
             return result.StatusCode;
         }
+
+        public async Task<List<GetRoleVM>> GetRole(string id)
+        {
+            List<GetRoleVM> entities = new List<GetRoleVM>();
+
+            using (var response = await httpClient.GetAsync(request + "GetRole?nik=" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<GetRoleVM>>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

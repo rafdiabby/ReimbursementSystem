@@ -185,7 +185,7 @@
                                         </ul>
                                         <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                                             <div class="tab-pane fade show active" id="role" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
-                                                <table class="table table-hover">
+                                                <table class="table table-hover" id="tabelRole">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -194,30 +194,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Otto</td>
-                                                            <td>
-                                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                                    <i class="fa fa-times"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
+                                                       
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="addRoles" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
                                                 <form>
                                                     <div class="form-group form-floating-label">
-                                                        <select class="form-control input-border-bottom" id="selectFloatingLabel" required>
-                                                            <option value="">&nbsp;</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
+                                                        <select id="roles" class="form-control" name="role" required>
                                                         </select>
-                                                        <label for="selectFloatingLabel" class="placeholder">Select</label>
                                                     </div>
                                                 </form>
                                             </div>

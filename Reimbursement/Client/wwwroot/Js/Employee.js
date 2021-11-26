@@ -52,7 +52,7 @@
             {
                 "data": "",
                 "render": function (data, type, row, meta) {
-                    var btn = '<div class="form-button-action"> <button type="button" data-toggle="modal" data-target="#addRole" data-toggle="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Add Role"> <i class="fa fa-plus"></i> </button> <button type="button" data-toggle="modal" data-target="#editData" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Data"> <i class="fa fa-edit"></i> </button> <button type="button" onclick="Delete(' + row['nik'] + ');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div>';
+                    var btn = '<div class="form-button-action"> <button type="button" onclick="GetRole(' + row['nik'] + ');" id="btnAddRole" data-toggle="modal" data-target="#addRole" data-tooltip="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Add Role"> <i class="fa fa-plus"></i> </button> <button type="button" data-toggle="modal" data-target="#editData" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Data"> <i class="fa fa-edit"></i> </button> <button type="button" onclick="Delete(' + row['nik'] + ');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div>';
                     return btn;
                 }
             }
@@ -72,6 +72,11 @@
                 }
             }
         ],
+    });
+
+    $('body').tooltip({
+        selector: "[data-tooltip=tooltip]",
+        container: "body"
     });
 
     $("#exportExcel").on('click', function (e) {
@@ -135,7 +140,46 @@
             return true;
         }
     });
+
+    $.ajax({
+        url: "/Roles/GetAll",
+        success: function (result) {
+            var role = [`<option value="">Choose...</option>`];
+            var data = result.length;
+            for (var i = 0; i < data; i++) {
+                role.push(`<option value="${result[i].roleId}">${result[i].roleName}</option>`);
+            }
+            $('#roles').html(role);
+        }
+    })
 });
+
+
+
+
+function GetRole(id) {
+    $.ajax({
+        url: "/Employees/GetRole/" + id,
+        success: function (hasil) {
+
+            console.log(hasil);
+            var dataRole = [];
+
+            $.each(hasil, function (key, val) {
+                dataRole.push(`<tr>
+                                <td>${key + 1}</td>
+                                <td>${val.roleName}</td>
+                                <td>
+                                    <button type="button" data-tooltip="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                              </tr>`);
+                $('#tabelRole').html(dataRole);
+            });
+        }
+    })
+}
 
 function Insert() {
 

@@ -100,5 +100,13 @@ namespace API.Controllers
                 return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = e.ToString() });
             }
         }
+
+        [HttpGet]
+        [Route("GetRole")]
+        public ActionResult<GetRoleVM> GetRole(string NIK)
+        {
+            var result = employeeRepository.GetRole(NIK);
+            return Ok(result);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using API.Models;
 using API.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -140,6 +141,19 @@ namespace API.Repository.Data
             myContext.Remove(entity);
             var result = myContext.SaveChanges();
             return result;
+        }
+        public IEnumerable<GetRoleVM> GetRole(string NIK)
+        {
+            var profile = (from acr in myContext.AccountRoles
+                           join role in myContext.Roles
+                            on acr.roleId equals role.roleId
+                           select new GetRoleVM
+                           {
+                               accountRoleid = acr.accountRoleId,
+                               nik = acr.NIK,
+                               roleName = role.roleName,
+                           }).Where(em => em.nik == NIK).ToList();
+            return profile;
         }
     }
 }
