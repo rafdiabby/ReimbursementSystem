@@ -8,8 +8,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Client.Base.Controllers;
-using Client.Repositories.Data;
 using API.ViewModels;
+using Client.Repository.Data;
 
 namespace Client.Controllers
 {
