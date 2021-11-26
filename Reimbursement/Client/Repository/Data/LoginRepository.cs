@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Client.Base.Url;
 using Client.Repository;
 
-namespace Client.Repositories.Data
+namespace Client.Repository.Data
 {
     public class LoginRepository : GeneralRepository<LoginVM, string>
     {
