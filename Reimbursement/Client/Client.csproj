@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Login\" />
     <Folder Include="wwwroot\uploads\" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <ProjectReference Include="..\API\API.csproj"></ProjectReference>

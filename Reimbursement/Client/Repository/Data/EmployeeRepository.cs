@@ -75,5 +75,18 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+
+        public async Task<ResultVM> Cek(LoginVM login)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "Cek", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

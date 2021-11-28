@@ -47,5 +47,11 @@ namespace Client.Controllers
             var result = await repository.AddAccountRole(accountRole);
             return Json(result);
         }
+
+        public async Task<JsonResult> Cek(LoginVM login)
+        {
+            var result = await repository.Cek(login);
+            return Json(result);
+        }
     }
 }

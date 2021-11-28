@@ -46,6 +46,9 @@ namespace API.Controllers
             }
             else
             {
+                //memgambil nilai NIK
+                var mail = loginVM.Email;
+                var nik = loginRepository.CekNIK(mail) ;
                 //mengambil rolename dari employe yang berhasil login
                 var getRoles = loginRepository.GetRole(loginVM.Email);
                 var data = new LoginDataVM()
@@ -72,7 +75,7 @@ namespace API.Controllers
                     );
                 var idtoken = new JwtSecurityTokenHandler().WriteToken(token); //generate token
                 claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
-                return Ok(new JWTokenVM { Token = idtoken, Messages = "Berhasil Login" });
+                return Ok(new JWTokenVM { Token = idtoken, Messages = nik });
             }
         }
     }

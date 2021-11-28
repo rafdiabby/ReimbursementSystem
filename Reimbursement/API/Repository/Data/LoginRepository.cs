@@ -46,6 +46,13 @@ namespace API.Repository.Data
                 return result;
             }
         }
+
+        public string CekNIK(string email)
+        {
+            var cekEmail = myContext.Employees.Where(a => a.email == email).FirstOrDefault();
+            var nik = cekEmail.NIK;
+            return nik;
+        }
         public string[] GetRole(string email)
         {
             var getData = myContext.Employees.Where(a => a.email == email).FirstOrDefault();
