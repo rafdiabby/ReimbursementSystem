@@ -124,26 +124,5 @@ namespace API.Controllers
                 return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "2" });
             }
         }
-
-        [HttpPost]
-        [Route("Cek")]
-        public ActionResult Cek(LoginVM loginVM)
-        {
-            var cek = employeeRepository.Cek(loginVM);
-            if (cek == "2")
-            {
-                //email tidak ada 
-                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
-            }
-            if (cek == "3")
-            {
-                //password salah
-                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "3" });
-            }
-            else
-            {
-                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
-            }
-        }
     }
 }

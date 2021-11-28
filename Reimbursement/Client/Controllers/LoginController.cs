@@ -55,5 +55,11 @@ namespace Client.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<JsonResult> Cek(LoginVM login)
+        {
+            var result = await repository.Cek(login);
+            return Json(result);
+        }
     }
 }

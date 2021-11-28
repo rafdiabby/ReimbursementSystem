@@ -171,38 +171,5 @@ namespace API.Repository.Data
                 return result;
             }
         }
-
-        public string Cek(LoginVM loginVM)
-        {
-            var cekEmail = myContext.Employees.Where(a => a.email == loginVM.Email).FirstOrDefault();
-            //Lakukan Cek Email
-            if (cekEmail != null)
-            {
-                //Lakukan cek password jika email ditemukan
-                var nik = cekEmail.NIK;
-                var getPassword = myContext.Accounts.Find(nik);
-                string pass = getPassword.password;
-                var cekPassword = Hasing.ValidatePassword(loginVM.Password, pass);
-                //Lakukan Cek Password
-                if (cekPassword == true)
-                {
-                    // berhasil login akan me return nilai nik
-                    var result = "1";
-                    return result;
-                }
-                else
-                {
-                    //jika password salah akan me return hasil nya
-                    var result = "3";
-                    return result;
-                }
-            }
-            else
-            {
-                //jika email salah akan me return hasil nya
-                var result = "2";
-                return result;
-            }
-        }
     }
 }

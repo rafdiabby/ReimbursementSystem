@@ -9,7 +9,7 @@
 
     console.log(obj);
     $.ajax({
-        url: "/Employees/Cek",
+        url: "/Login/Cek",
         type: 'POST',
         data: { login: obj },
         dataType: "json"

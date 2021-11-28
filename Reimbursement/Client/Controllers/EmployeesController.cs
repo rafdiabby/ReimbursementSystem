@@ -14,6 +14,7 @@ using Client.Repository.Data;
 namespace Client.Controllers
 {
     [Authorize]
+    //[Authorize(Roles = "HR")]
     public class EmployeesController : BaseController<Employee, EmployeeRepository, string>
     {
         private readonly EmployeeRepository repository;
@@ -45,12 +46,6 @@ namespace Client.Controllers
         public async Task<JsonResult> AddAccountRole(AccountRole accountRole)
         {
             var result = await repository.AddAccountRole(accountRole);
-            return Json(result);
-        }
-
-        public async Task<JsonResult> Cek(LoginVM login)
-        {
-            var result = await repository.Cek(login);
             return Json(result);
         }
     }

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +77,27 @@ namespace API.Controllers
                 var idtoken = new JwtSecurityTokenHandler().WriteToken(token); //generate token
                 claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
                 return Ok(new JWTokenVM { Token = idtoken, Messages = nik });
+            }
+        }
+
+        [HttpPost]
+        [Route("Cek")]
+        public ActionResult Cek(LoginVM loginVM)
+        {
+            var cek = loginRepository.Cek(loginVM);
+            if (cek == "2")
+            {
+                //email tidak ada 
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
+            }
+            if (cek == "3")
+            {
+                //password salah
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "3" });
+            }
+            else
+            {
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
             }
         }
     }
