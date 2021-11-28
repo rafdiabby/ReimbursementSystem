@@ -1,4 +1,7 @@
 ﻿function Login() {
+    var x = document.getElementById("loading");
+    x.style.display = "block";
+
     var obj = new Object();
 
     obj.Email = $("#email").val();
@@ -19,12 +22,14 @@
                 title: 'Oops...',
                 text: 'Email belum terdaftar !!!'
             })
+            x.style.display = "none";
         } else {
             swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Password Salah !!!'
             })
+            x.style.display = "none";
         }
     }).fail((error) => {
         console.log(error);
