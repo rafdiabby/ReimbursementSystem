@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Base.Url;
 using Client.Repository;
+using API.Models;
 
 namespace Client.Repositories.Data
 {
@@ -17,7 +18,7 @@ namespace Client.Repositories.Data
         private readonly Address address;
         private readonly HttpClient httpClient;
         private readonly string request;
-        public LoginRepository(Address address, string request = "Employees/") : base(address, request)
+        public LoginRepository(Address address, string request = "Logins/") : base(address, request)
         {
             this.address = address;
             this.request = request;
@@ -31,12 +32,38 @@ namespace Client.Repositories.Data
             JWTokenVM token = null;
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync(request + "Sign", content);
+            var result = await httpClient.PostAsync(request + "Login", content);
 
             string apiResponse = await result.Content.ReadAsStringAsync();
             token = JsonConvert.DeserializeObject<JWTokenVM>(apiResponse);
 
             return token;
+        }
+
+        public async Task<ResultVM> Cek(LoginVM login)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "Cek", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<ResultVM> ResetPW(Account account)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PutAsync(request + "ResetPassword", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
         }
     }
 }

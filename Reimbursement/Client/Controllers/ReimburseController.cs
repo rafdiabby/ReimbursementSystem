@@ -1,7 +1,9 @@
-﻿using API.Models;
+using Microsoft.AspNetCore.Authorization;
+using API.Models;
 using API.ViewModels;
 using Client.Models;
 using Client.Repository.Data;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class ReimburseController : Controller
     {
         private readonly IWebHostEnvironment hostingEnvironment;

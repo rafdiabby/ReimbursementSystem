@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutLogin";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Not Found 404 !!!!'
+        }).then(function () {
+            window.location = "/Login";
+        });
+    </script>
+}

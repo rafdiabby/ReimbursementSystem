@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "_Layout";
+}
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Profile</h2>
+                <h5 class="text-white op-7 mb-2">Profile employee accounts</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Profile Employee</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:20%"><p>NIK</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="nik"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Full Name</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="fullname"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Email</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="email"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Phone</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="phone"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Gender</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="gender"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Nn Rekening</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="noRekening"></b></p></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%"><p>Role</p></td>
+                            <td style="width:2%"><p> : </p></td>
+                            <td style="width:68%"><p><b id="acRole"></b></p></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{ 
+    <script src="~/Js/Profile.js"></script>
+}

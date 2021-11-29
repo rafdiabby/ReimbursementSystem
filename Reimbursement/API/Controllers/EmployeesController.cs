@@ -33,19 +33,22 @@ namespace API.Controllers
             var cek = employeeRepository.Register(registerVM);
             if (cek == 1)
             {
-                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "Data Berhasil Ditambahkan" });
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
             }
             if (cek == 2)
             {
-                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "Data Gagal di tambahkan ( NIK Sudah ada ) !!!" });
+                //NIK
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
             }
             if (cek == 3)
             {
-                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "Data Gagal Ditambahkan ( Email Sudah di Gunakan ) !!!!" });
+                //Email
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "3" });
             }
             else
             {
-                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "Data Gagal Ditambahkan ( No Hp sudah di gunakan )!!!" });
+                //Phone
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "4" });
             }
         }
 
@@ -78,6 +81,47 @@ namespace API.Controllers
             else
             {
                 return NotFound(new ResultVM{ Status = HttpStatusCode.NotFound.ToString(), Pesan = "Data tidak ditemukan !!!" });
+            }
+        }
+
+        [HttpDelete]
+        [Route("Hapus")]
+        public ActionResult Hapus(string NIK)
+        {
+            try
+            {
+                employeeRepository.Hapus(NIK);
+                //Berhasil Hapus
+                return Ok(new ResultVM { Status = HttpStatusCode.OK.ToString(), Pesan ="1" });
+            }
+            catch (Exception e)
+            {
+                //Gagal 
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = e.ToString() });
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRole")]
+        public ActionResult<GetRoleVM> GetRole(string NIK)
+        {
+            var result = employeeRepository.GetRole(NIK);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("AddAccountRole")]
+        public ActionResult AddAccountRole(AccountRole accountRole)
+        {
+            var cek = employeeRepository.AddAccountRole(accountRole);
+            if (cek == 1)
+            {
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+            else
+            {
+                //Phone
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = "2" });
             }
         }
     }

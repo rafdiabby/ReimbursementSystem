@@ -15,7 +15,7 @@ using Client.Base.Url;
 using Client.Repository;
 using API.ViewModels;
 
-namespace Client.Repositories.Data
+namespace Client.Repository.Data
 {
     public class EmployeeRepository : GeneralRepository<Employee, string>
     {
@@ -30,6 +30,50 @@ namespace Client.Repositories.Data
             {
                 BaseAddress = new Uri(address.link)
             };
+        }
+
+        public async Task<ResultVM> Register(RegisterVM register)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "Register", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
+
+        public HttpStatusCode DeleteEmployees(string id)
+        {
+            var result = httpClient.DeleteAsync(request + "Hapus?nik=" + id).Result;
+            return result.StatusCode;
+        }
+
+        public async Task<List<GetRoleVM>> GetRole(string id)
+        {
+            List<GetRoleVM> entities = new List<GetRoleVM>();
+
+            using (var response = await httpClient.GetAsync(request + "GetRole?nik=" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<GetRoleVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<ResultVM> AddAccountRole(AccountRole accountRole)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(accountRole), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "AddAccountRole", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
         }
     }
 }
