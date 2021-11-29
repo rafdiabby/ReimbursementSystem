@@ -1,15 +1,18 @@
 ﻿using API.Base;
+using API.Models;
 using API.Repository.Data;
 using API.Viewmodels;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +49,9 @@ namespace API.Controllers
             }
             else
             {
+                //memgambil nilai NIK
+                var mail = loginVM.Email;
+                var nik = loginRepository.CekNIK(mail) ;
                 //mengambil rolename dari employe yang berhasil login
                 var getRoles = loginRepository.GetRole(loginVM.Email);
                 var data = new LoginDataVM()
@@ -72,7 +78,44 @@ namespace API.Controllers
                     );
                 var idtoken = new JwtSecurityTokenHandler().WriteToken(token); //generate token
                 claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
-                return Ok(new JWTokenVM { Token = idtoken, Messages = "Berhasil Login" });
+                return Ok(new JWTokenVM { Token = idtoken, Messages = nik });
+            }
+        }
+
+        [HttpPost]
+        [Route("Cek")]
+        public ActionResult Cek(LoginVM loginVM)
+        {
+            var cek = loginRepository.Cek(loginVM);
+            if (cek == "2")
+            {
+                //email tidak ada 
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
+            }
+            if (cek == "3")
+            {
+                //password salah
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "3" });
+            }
+            else
+            {
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+        }
+
+        [HttpPut]
+        [Route("ResetPassword")]
+        public ActionResult ResetPW(Account account, string nik)
+        {
+            var result = loginRepository.ResetPW(account, nik);
+            if(result == 1)
+            {
+                //berhasil
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+            else
+            {
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
             }
         }
     }

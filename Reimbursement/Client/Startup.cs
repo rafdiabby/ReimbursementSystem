@@ -4,6 +4,7 @@ using Client.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,8 +34,13 @@ namespace Client
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<Address>();
             services.AddScoped<LoginRepository>();
+
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<AccountRoleRepository>();
+
             services.AddScoped<ReimburseRepository>();
             services.AddScoped<MailRepository>();
+
 
             services.AddControllersWithViews();
             services.AddSession();
@@ -77,6 +84,34 @@ namespace Client
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseStatusCodePages(async context =>
+            {
+                var request = context.HttpContext.Request;
+                var response = context.HttpContext.Response;
+
+                if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
+                {
+                    response.Redirect("/Login/Error401");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
+                {
+                    response.Redirect("/Login/ErrorNotFound");
+                }
+            });
+
+            app.UseSession();
+            app.Use(async (context, next) =>
+            {
+                var JWToken = context.Session.GetString("JWToken");
+                if (!string.IsNullOrEmpty(JWToken))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
+                }
+                await next();
+            });
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

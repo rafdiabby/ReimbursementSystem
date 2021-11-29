@@ -2,3 +2,336 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
 }
+
+
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Employee</h2>
+                <h5 class="text-white op-7 mb-2">Manage employee accounts</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Employee</h4>
+                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#tambahData">
+                            <i class="fa fa-plus"></i> Add Employee
+                        </button>
+                        <button class="btn btn-success btn-round ml-1" id="exportExcel" data-toggle="tooltip" data-placement="bottom" title="Export Excel!">
+                            <i class="fa fa-file-excel"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*Modal tambah data*@
+                    <div class="modal fade" id="tambahData" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <span class="fw-bold">
+                                            Add Employee
+                                        </span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="EmployeeForm">
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK">
+                                                <div id="pesanNik" class="invalid-tooltip">
+                                                    NIK belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">First Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Frist Name">
+                                                <div class="invalid-tooltip">
+                                                    First Name belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Last Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+                                                <div class="invalid-tooltip">
+                                                    Last Name belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email@email.com">
+                                                <div class="invalid-tooltip">
+                                                    Email belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">+62</div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+                                                    <div class="invalid-tooltip">
+                                                        Phone belum di isi !!!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Gender</label>
+                                            <div class="col-sm-10">
+                                                <select id="gender" name="gender" class="form-control" required>
+                                                    <option value="">Choose...</option>
+                                                    <option value="0">Male</option>
+                                                    <option value="1">Female</option>
+                                                </select>
+                                                <div class="invalid-tooltip">
+                                                    Gender harus diisi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">No Rekening</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="noRekening" name="noRekening" placeholder="No Rekening">
+                                                <div class="invalid-tooltip">
+                                                    No Rekening belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer no-bd">
+                                    <button type="button" id="btnSubmit" form="EmployeeForm" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="EmployeeTable" class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NIK</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Rekening</th>
+                                    <th style="width: 10%">Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>NIK</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Rekening</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    @*Modal add role*@
+                    <div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <span class="fw-bold">
+                                            Add Role
+                                        </span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab-without-border" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab-nobd" data-toggle="pill" href="#role" role="tab" aria-controls="pills-home-nobd" aria-selected="true"><i class="fas fa-home"> </i> Role</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab-nobd" data-toggle="pill" href="#addRoles" role="tab" aria-controls="pills-profile-nobd" aria-selected="false"><i class="fas fa-plus-circle"> </i> Add Role</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+                                            <div class="tab-pane fade show active" id="role" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
+                                                <table class="table table-hover" id="tabelRole">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Role Name</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="addRoles" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
+                                                <form id="formAddRole">
+                                                    <input hidden type="text" class="form-control" id="nikRole" name="nikRole">
+                                                    <div class="form-group form-floating-label">
+                                                        <select id="roles" class="form-control" name="roles" required>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                                <div class="form-group">
+                                                    <button type="button" id="btnAddRole" form="formAddRole" class="btn btn-success">Add Role <i class="fas fa-plus-circle"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer no-bd">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Modal Edit*@
+                    <div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">
+                                            <i class="fa fa-edit"></i>
+                                        </span>
+                                        <span class="fw-bold">
+                                            Edit Employee
+                                        </span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="EmployeeFormEdit">
+                                        <div class="form-group row" hidden>
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="enik" name="enik" placeholder="NIK">
+                                                <div id="pesanNik" class="invalid-tooltip">
+                                                    NIK belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">First Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="efirstName" name="efirstName" placeholder="Frist Name">
+                                                <div class="invalid-tooltip">
+                                                    First Name belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Last Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="elastName" name="elastName" placeholder="Last Name">
+                                                <div class="invalid-tooltip">
+                                                    Last Name belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="eemail" name="eemail" placeholder="Email@email.com">
+                                                <div class="invalid-tooltip">
+                                                    Email belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">+62</div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="ephone" name="ephone" placeholder="Phone Number">
+                                                    <div class="invalid-tooltip">
+                                                        Phone belum di isi !!!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Gender</label>
+                                            <div class="col-sm-10">
+                                                <select id="egender" name="egender" class="form-control" required>
+                                                    <option value="">Choose...</option>
+                                                    <option value="0">Male</option>
+                                                    <option value="1">Female</option>
+                                                </select>
+                                                <div class="invalid-tooltip">
+                                                    Gender harus diisi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">No Rekening</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="enoRekening" name="enoRekening" placeholder="No Rekening">
+                                                <div class="invalid-tooltip">
+                                                    No Rekening belum di isi !!!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer no-bd">
+                                    <button type="button" id="btnEditData" form="EmployeeFormEdit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="~/Js/Employee.js"></script>
+}
