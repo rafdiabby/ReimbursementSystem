@@ -16,7 +16,7 @@ namespace API.Controllers
             this.mailService = mailService;
         }
         [HttpPost("send")]
-        public async Task<IActionResult> SendMail([FromForm]MailRequestVM request)
+        public async Task<IActionResult> SendMail(MailRequestVM request)
         {
             try
             {

@@ -10,6 +10,6 @@ namespace Client.Models
     {
         public string ImageCaption { set; get; }
         public string ImageDescription { set; get; }
-        public List<IFormFile> MyImage { set; get; }
+        public IFormFile MyImage { set; get; }
     }
 }

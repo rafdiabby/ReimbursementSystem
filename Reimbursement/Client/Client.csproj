@@ -8,14 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-
     <Folder Include="wwwroot\uploads\" />
-
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\API\API.csproj" /
+	  <Folder Include="wwwroot\Dashboard\" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <ProjectReference Include="..\API\API.csproj"></ProjectReference>
   </ItemGroup>
 
 </Project>
