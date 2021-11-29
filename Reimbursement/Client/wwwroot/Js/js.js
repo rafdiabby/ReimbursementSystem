@@ -2,7 +2,8 @@
     var nik = document.getElementById("sessionNIK").value;
     var reimburse = document.getElementById("Reimburse");
     var employees = document.getElementById("Employees");
-    var reimburseApproval = document.getElementById("ReimburseApproval");
+    var reimburseApprovalHR = document.getElementById("ReimburseApprovalHR");
+    var reimburseApprovalFinance = document.getElementById("ReimburseApprovalFinance");
     
     $.ajax({
         url: "/Employees/GetRole/" + nik,
@@ -15,16 +16,21 @@
             if (dataRole.find(element => element == "Finance")) {
                 console.log("ini Finance");
                 document.getElementById("jabatan").innerHTML = "Finance";
-                employees.style.display = "none";
+
+                reimburse.style.display = "block";
+                reimburseApprovalFinance.style.display = "block";
             } else if (dataRole.find(element => element == "HR")) {
                 console.log("ini HR");
                 document.getElementById("jabatan").innerHTML = "HR";
-                reimburseApproval.style.display = "none";
+
+                reimburse.style.display = "block";
+                employees.style.display = "block";
+                reimburseApprovalHR.style.display = "block";
             } else {
                 console.log("ini Employee");
                 document.getElementById("jabatan").innerHTML = "Employee";
-                employees.style.display = "none";
-                reimburseApproval.style.display = "none";
+
+                reimburse.style.display = "block";
             }
         }
     });
