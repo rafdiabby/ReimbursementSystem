@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "_Layout";
+}
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Ubah Password</h2>
+                <h5 class="text-white op-7 mb-2">Profile employee accounts</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Reset Password</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form id="EmployeeFormEdit">
+                        <div class="form-group row" hidden>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id" name="id" placeholder="NIK">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password Baru</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="password" name="password" placeholder="NIK">
+                                <div id="pass" class="invalid-tooltip">
+                                    NIK belum di isi !!!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Konfirmasi Password</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="confirPassword" name="confirPassword" placeholder="NIK">
+                                <div id="confirPass" class="invalid-tooltip">
+                                    NIK belum di isi !!!
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{ 
+    <script src="~/Js/Reset.js"></script>
+}
