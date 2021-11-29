@@ -51,6 +51,21 @@ namespace API.Controllers
                 return Ok(data);
             }
         }
+        [Route("GetOnly/{id}")]
+        [HttpGet]
+        public ActionResult<ReimDataVM> GetOnly(int id)
+        {
+            var data = reimbursementRepository.ReimDataId(id);
+            if (data.Count() == 0)
+            {
+                return BadRequest(new { message = "Can't find data" });
+            }
+            else
+            {
+                return Ok(data);
+            }
+
+        }
 
         [Route("UpdateStatus")]
         [HttpPatch]
@@ -58,6 +73,12 @@ namespace API.Controllers
         {
             var result = reimbursementRepository.UpdateStatus(reimbursement);
             return Ok(result);
+        }
+        [Route("LastId")]
+        [HttpGet]
+        public IActionResult GetLastId()
+        {
+            return Ok(reimbursementRepository.LastId());
         }
     }
 }

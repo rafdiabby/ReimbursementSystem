@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 
 namespace API.ViewModels
 {
@@ -7,16 +8,14 @@ namespace API.ViewModels
     {
         public int reimId { get; set; }
         public string NIK { get; set; }
-        public string fullName { get; set; }
-        public string phone { get; set; }
         public DateTime date { get; set; }
         public int amount { get; set; }
         public string description  { get; set; }
-        public string receipt { get; set; }
-        public string category { get; set; }
-        public string status { get; set; }
+        public string[] receipt { get; set; }
+        public int categoryId { get; set; }
+        public int statusId { get; set; }
         public string statusDetails { get; set; }
-        public IFormFile receiptFile { get; set; }
+        public List<IFormFile> receiptFile { get; set; }
 
 
     }

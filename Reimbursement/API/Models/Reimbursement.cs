@@ -17,7 +17,6 @@ namespace API.Models
         public DateTime date { get; set; }
         public int amount { get; set; }
         public string description { get; set; }
-        public string receipt { get; set; }
         public string statusDetails { get; set; }
         public int categoryId { get; set; }
         public int statusId { get; set; }
@@ -34,5 +33,7 @@ namespace API.Models
         public virtual Status Status { get; set; }
         [JsonIgnore]
         public virtual ICollection<StatusHistory> StatusHistories { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Attachment> Attachments  { get; set; }
     }
 }

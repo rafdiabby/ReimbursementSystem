@@ -1,5 +1,6 @@
 using Client.Base.Url;
 using Client.Repositories.Data;
+using Client.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,8 @@ namespace Client
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<Address>();
             services.AddScoped<LoginRepository>();
+            services.AddScoped<ReimburseRepository>();
+            services.AddScoped<MailRepository>();
 
             services.AddControllersWithViews();
             services.AddSession();
