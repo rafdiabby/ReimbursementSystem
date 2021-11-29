@@ -1,4 +1,5 @@
-﻿using API.ViewModels;
+﻿using API.Models;
+using API.ViewModels;
 using Client.Base.Controllers;
 using Client.Repositories.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -59,6 +60,12 @@ namespace Client.Controllers
         public async Task<JsonResult> Cek(LoginVM login)
         {
             var result = await repository.Cek(login);
+            return Json(result);
+        }
+
+        public async Task<JsonResult> ResetPW(Account account)
+        {
+            var result = await repository.ResetPW(account);
             return Json(result);
         }
     }

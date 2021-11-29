@@ -1,5 +1,8 @@
 ﻿using API.Context;
+using API.Models;
 using API.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +106,18 @@ namespace API.Repository.Data
                 var result = "2";
                 return result;
             }
+        }
+
+        public int ResetPW(Account account, string nik)
+        {
+            Account accounts = new Account()
+            {
+                NIK = account.NIK,
+                password = Hasing.HashPassword(account.password)
+            };
+            myContext.Entry(accounts).State = EntityState.Modified;
+            var result = myContext.SaveChanges();
+            return result;
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using API.Base;
+using API.Models;
 using API.Repository.Data;
 using API.Viewmodels;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -98,6 +100,22 @@ namespace API.Controllers
             else
             {
                 return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+        }
+
+        [HttpPut]
+        [Route("ResetPassword")]
+        public ActionResult ResetPW(Account account, string nik)
+        {
+            var result = loginRepository.ResetPW(account, nik);
+            if(result == 1)
+            {
+                //berhasil
+                return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
+            }
+            else
+            {
+                return NotFound(new ResultVM { Status = (HttpStatusCode.NotFound).ToString(), Pesan = "2" });
             }
         }
     }

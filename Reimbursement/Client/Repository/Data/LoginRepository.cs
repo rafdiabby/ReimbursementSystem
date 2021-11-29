@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Base.Url;
 using Client.Repository;
+using API.Models;
 
 namespace Client.Repositories.Data
 {
@@ -45,6 +46,19 @@ namespace Client.Repositories.Data
             StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
 
             using (var response = await httpClient.PostAsync(request + "Cek", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<ResultVM> ResetPW(Account account)
+        {
+            ResultVM entities = new ResultVM();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PutAsync(request + "ResetPassword", content))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 entities = JsonConvert.DeserializeObject<ResultVM>(apiResponse);

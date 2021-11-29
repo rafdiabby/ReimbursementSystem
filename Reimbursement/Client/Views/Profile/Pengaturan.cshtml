@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form id="EmployeeFormEdit">
+                    <form id="reset">
                         <div class="form-group row" hidden>
                             <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
                             <div class="col-sm-10">
@@ -32,20 +32,23 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password Baru</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="password" name="password" placeholder="NIK">
+                                <input type="password" class="form-control" id="password" name="password">
                                 <div id="pass" class="invalid-tooltip">
-                                    NIK belum di isi !!!
+                                    Password belum diisi !!!
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Konfirmasi Password</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="confirPassword" name="confirPassword" placeholder="NIK">
+                                <input type="password" class="form-control" id="confirPassword" name="confirPassword">
                                 <div id="confirPass" class="invalid-tooltip">
-                                    NIK belum di isi !!!
+                                    Harus diisi !!!
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <button type="button" id="btnSubmit" form="reset" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
                         </div>
                     </form>
                 </div>
