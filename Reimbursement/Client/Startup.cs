@@ -34,8 +34,13 @@ namespace Client
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<Address>();
             services.AddScoped<LoginRepository>();
+
             services.AddScoped<RoleRepository>();
             services.AddScoped<AccountRoleRepository>();
+
+            services.AddScoped<ReimburseRepository>();
+            services.AddScoped<MailRepository>();
+
 
             services.AddControllersWithViews();
             services.AddSession();

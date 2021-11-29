@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Client.Models
+@model CreatePost
+<form asp-action="Create" asp-controller="Reimburse" enctype="multipart/form-data">   
+
+    <input asp-for="ImageCaption"/>
+    <input asp-for="ImageDescription"/>
+    <input asp-for="MyImage"/>
+
+    <input type="submit"/>
+</form>

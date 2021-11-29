@@ -45,6 +45,7 @@ namespace API
             services.AddScoped<StatusHistoryRepository>();
             services.AddScoped<StatusRepository>();
             services.AddScoped<LoginRepository>();
+            services.AddScoped<AttachmentRepository>();
 
             services.AddDbContext<MyContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("APIContext")));

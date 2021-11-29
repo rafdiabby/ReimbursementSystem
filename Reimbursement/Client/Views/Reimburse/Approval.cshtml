@@ -1,0 +1,159 @@
+﻿@using API.ViewModels
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Reimbursement Request</h2>
+                <h5 class="text-white op-7 mb-2">Metrodata Coding Camp Reimbursement System</h5>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Request Details</div>
+            </div>
+            <div class="card-body">
+                <div id="registerForm" class="modal-body">
+
+                    @model RequestReimVM
+                    <form id="request" class="needs-validation user" name="rquest" enctype="multipart/form-data" novalidate>
+                        <div class="form-group" hidden>
+                            <label for="isEdit">Is Edit?</label>
+                            <input type="text" class="form-control" id="isEdit">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group row">
+                                    <label for="reimId" class="col-sm-2 col-form-label">Reimbursement ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control-plaintext" id="reimId" name="reimId" placeholder="reimId" value="@Html.ValueFor(o => o.reimId)" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control-plaintext" id="inputNIK" name="nik" placeholder="MCCxxxx" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Full Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control-plaintext" id="fullName" placeholder="John Doe" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control-plaintext" id="inputPhone" placeholder="08xxxx" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control-plaintext" id="inputCategory" name="categoryId" placeholder="MCCxxxx" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputDesc" class="col-sm-2 col-form-label">Descriptions</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control-plaintext" id="inputDesc" name="description" placeholder="Write description here" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputAmount" class="col-sm-2 col-form-label">Amount to be reimbursed</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control-plaintext" id="inputAmount" name="Amount" placeholder="Rp.xxx.xxx" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputReceipt" class="col-sm-2 col-form-label">Transaction Receipts</label>
+                                    <div class="col-sm-10" id="receipts">
+          
+                                    </div>
+                               
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="card-action ml-auto">
+                <a type="button" href="../Dashboard" class="btn btn-secondary">Cancel</a>
+                <button type="button" data-toggle="modal" data-target="#rejectModal" class="btn btn-danger">Reject</button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#approvalModal">Approve</button>
+            </div>
+    </div></div>
+
+<!-- Modal -->
+<div class="modal fade" id="approvalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request Approval</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="approveForm" class="needs-validation user" name="approve" enctype="multipart/form-data" novalidate>
+                       
+                       
+            <div class="form-group row">
+                <label for="statusDetails" class="col-sm-2 col-form-label">Messages</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="statusDetails" placeholder="reimId">
+                </div>
+            </div>
+
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="approve" class="btn btn-success">Approve</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Reject -->
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reject Approval</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="rejectForm" class="needs-validation user" name="reject" enctype="multipart/form-data" novalidate>
+                       
+                       
+            <div class="form-group row">
+                <label for="statusDetails" class="col-sm-2 col-form-label">Messages</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="statusDetails2" placeholder="reimId">
+                </div>s
+            </div>
+
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="reject" class="btn btn-danger">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    @section scripts{
+        <script src="~/Reimbursement/js/approval.js" asp-append-version="true"></script>
+    }

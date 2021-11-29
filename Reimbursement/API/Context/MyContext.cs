@@ -21,6 +21,7 @@ namespace API.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<StatusHistory> StatusHistories { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
         //define relations here using modelbuilder
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,6 +68,11 @@ namespace API.Context
             modelBuilder.Entity<Status>()
                 .HasMany(b => b.StatusHistories)
                 .WithOne(a => a.Status);
+
+            //attachment
+            modelBuilder.Entity<Attachment>()
+                .HasOne(a => a.Reimbursement)
+                .WithMany(b => b.Attachments);
 
         }
     }
