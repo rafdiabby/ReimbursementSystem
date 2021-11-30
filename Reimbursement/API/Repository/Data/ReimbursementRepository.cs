@@ -141,8 +141,15 @@ namespace API.Repository.Data
         //ambil id terakhir
         public int LastId()
         {
-            var result = context.Reimbursements.OrderByDescending(r => r.id).FirstOrDefault().id;
-            return result;
+            try
+            {
+                var result = context.Reimbursements.OrderByDescending(r => r.id).FirstOrDefault().id;
+                return result;
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
         }
     }
 }
