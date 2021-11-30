@@ -9,8 +9,9 @@
         if ($("#reset").valid() == true) {
             var pass = document.getElementById("password").value;
             var passConfir = document.getElementById("confirPassword").value;
-            var cek = console.log(pass == passConfir);
-            if (cek == true) {
+            var cek = (pass == passConfir).toString();
+            console.log(cek);
+            if (cek == "false") {
                 swal("ERROR", "Password dan Confirmasi Password tidak sama !!!", {
                     icon: "error",
                     buttons: {
