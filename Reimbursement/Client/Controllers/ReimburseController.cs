@@ -100,7 +100,7 @@ namespace Client.Controllers
             }
             var mailContent = new MailRequestVM
             {
-                ToEmail = "sujitolyoko626@gmail.com",
+                ToEmail = "giribudi30@gmail.com",
                 Subject = "New Reimbursement Request",
                 Body = "Your employee with NIK : " + data.NIK + " has new reimbursement request waiting for approval, check on website for additional details"
             };
