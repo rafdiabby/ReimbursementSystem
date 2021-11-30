@@ -1,6 +1,7 @@
-﻿document.getElementById("submitReq").addEventListener("click", function (event) {
-    event.preventDefault()
-});
+﻿
+//document.getElementById("submitReq").addEventListener("click", function (event) {
+//    event.preventDefault()
+//});
 
 $("#submitReq").click(function () {
     var mailContent = new Object();
@@ -19,5 +20,12 @@ $("#submitReq").click(function () {
         'dataType': 'json'
     }).done((result) => {
         document.forms[0].submit();
-    }
+    })
 })
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var reimburse = document.getElementById("Reimburse")
+reimburse.classList.add("active")
+console.log("yhaa")

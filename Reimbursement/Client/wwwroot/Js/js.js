@@ -5,6 +5,8 @@
     var reimburseApprovalHR = document.getElementById("ReimburseApprovalHR");
     var reimburseApprovalFinance = document.getElementById("ReimburseApprovalFinance");
     
+    
+    
     $.ajax({
         url: "/Employees/GetRole/" + nik,
         success: function (hasil) {
@@ -19,6 +21,7 @@
 
                 reimburse.style.display = "block";
                 reimburseApprovalFinance.style.display = "block";
+                $("#onlyEmployee").val("No");
             } else if (dataRole.find(element => element == "HR")) {
                 console.log("ini HR");
                 document.getElementById("jabatan").innerHTML = "HR";
@@ -26,14 +29,18 @@
                 reimburse.style.display = "block";
                 employees.style.display = "block";
                 reimburseApprovalHR.style.display = "block";
+                $("#onlyEmployee").val("No");
             } else {
                 console.log("ini Employee");
                 document.getElementById("jabatan").innerHTML = "Employee";
 
                 reimburse.style.display = "block";
+                /*$("#onlyEmployee").val("Yes");*/
+                document.getElementById("onlyEmployee").value = "Yes";
             }
         }
     });
+    console.log("ini abis ambil role")
     $.ajax({
         url: "/Employees/Get/" + nik,
         success: function (hasil) {
