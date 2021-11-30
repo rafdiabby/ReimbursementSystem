@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Reimbursement Approval Finance</h2>
+                <h5 class="text-white op-7 mb-2">Metrodata Coding Camp Reimbursement System</h5>
+            </div>
+            <div class="ml-md-auto py-2 py-md-0">
+                
+                <a href="Reimburse" class="btn btn-secondary btn-round">Request Reimbursement</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="card full-height">
+        <div class="card-header">
+            <div class="card-head-row">
+                <div class="card-title">All Requests</div>
+                <div class="card-tools">
+                    <button type="button" id="btnAdd" title="approval" class="btn fa btn-info btn-sm " data-toggle="modal" data-target="#modalReim">
+                    <i class="fa fa-plus"></i> Add
+            </button>
+                    <button type="button" id="btnExcel" title="Export Excel" class="btn btn-info btn-border btn-round btn-sm mr-2 " onclick="ExportExcel()">
+                    Export
+                </button></div>
+
+            </div>
+            <div class="card-body">
+                <table id="reimData" class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>NIK</th>
+                            <th>Fullname</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Status Details</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*modallllll*@
+<div class="modal fade" id="modalReim" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Request Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="reimDetails" class="modal-body">
+                
+                <form>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Emaiasdasdasdasdasdl</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Dashboard/js/Finance.js" asp-append-version="true"></script>
+    <!-- Datatable and validation-->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+}

@@ -44,7 +44,12 @@ namespace Client.Controllers
             var data = new RequestReimVM { reimId = reimId };
             return View(data);
         }
-
+        [Route("Finance/Approval/{reimId}")]
+        public IActionResult FinanceApproval(int reimId)
+        {
+            var data = new RequestReimVM { reimId = reimId };
+            return View(data);
+        }
         [HttpPost]
         public IActionResult Create(CreatePost model)
         {

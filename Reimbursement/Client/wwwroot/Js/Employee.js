@@ -52,7 +52,14 @@
             {
                 "data": "",
                 "render": function (data, type, row, meta) {
-                    var btn = '<div class="form-button-action"> <button type="button" onclick="GetRole(' + row['nik'] + ');" id="btnAddRole" data-toggle="modal" data-target="#addRole" data-tooltip="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Add Role"> <i class="fa fa-plus"></i> </button> <button type="button" data-toggle="modal" data-target="#editData" onclick="Get(' + row['nik'] + ');" id="btnEdit" data-tooltip="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Data"> <i class="fa fa-edit"></i> </button> <button type="button" onclick="Delete(' + row['nik'] + ');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div>';
+                    var btn = `<div class="form-button-action"> 
+                                <button type = "button" onclick = "GetRole('${row['nik']}');" id = "btnAddRole" data-toggle="modal" data-target="#addRole" data - tooltip="tooltip" title = "" class="btn btn-link btn-success btn-lg" data - original - title="Add Role" >
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button type="button" data-toggle="modal" data-target="#editData" onclick="Get('${row['nik']}');" id = "btnEdit" data - tooltip="tooltip" title = "" class="btn btn-link btn-primary btn-lg" data - original - title="Edit Data" >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" onclick="Delete('${row['nik']}');" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div >`;
                     return btn;
                 }
             }
@@ -128,18 +135,18 @@
         }
     });
 
-    $("#nik").keypress(function (data) {
-        if (data.which != 8 && data.which != 0 && (data.which < 48 || data.which > 57)) {
-            $('#nik').addClass('is-invalid');
-            $("#pesanNik").html("Nik Harus Berupa Angka !!!").show();
-            return false;
-        }
-        else {
-            $('#nik').css('border-color', 'Green');
-            $("#pesanNik").hide();
-            return true;
-        }
-    });
+    //$("#nik").keypress(function (data) {
+    //    if (data.which != 8 && data.which != 0 && (data.which < 48 || data.which > 57)) {
+    //        $('#nik').addClass('is-invalid');
+    //        $("#pesanNik").html("Nik Harus Berupa Angka !!!").show();
+    //        return false;
+    //    }
+    //    else {
+    //        $('#nik').css('border-color', 'Green');
+    //        $("#pesanNik").hide();
+    //        return true;
+    //    }
+    //});
 
     $.ajax({
         url: "/Roles/GetAll",
@@ -192,10 +199,10 @@ function GetRole(id) {
 function AddAccountRole() {
 
     var obj = new Object();
-
+    
     obj.nik = $("#nikRole").val();
     obj.roleId = $("#roles").val();
-
+    console.log(obj);
     $.ajax({
         url: "/Employees/AddAccountRole",
         type: 'POST',
@@ -428,6 +435,7 @@ function Get(nik) {
                 $('#egender').val(1);
             }
             $('#enoRekening').val(result.bankAccount);
+            console.log(result)
         }
     })
 }
@@ -474,3 +482,9 @@ function Edit() {
         });
     })
 }
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("Employees")
+employee.classList.add("active")

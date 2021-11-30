@@ -10,14 +10,14 @@ var formatter = new Intl.NumberFormat('en-US', {
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
-    
+
 //using datatable
 $(document).ready(function () {
-   console.log("ini dashboard")
+    console.log("ini dashboard")
     var onlyNoob = document.getElementById("jabatan").value;
     var nik = document.getElementById("sessionNIK").value;
 
-    var url = "https://localhost:44393/API/Reimbursements/GetAll/" + nik;
+    var url = "https://localhost:44393/API/Reimbursements/GetAll/"
 
     $("#reimData").DataTable({
         'responsive': true,
@@ -80,13 +80,13 @@ $(document).ready(function () {
             {
                 "data": "statusDetails"
             },
-            //{
-            //    "data": "",
-            //    "render": function (data, type, row, meta) {
-            //        return `<a href="../Approval/${row['reimId']}" data-toggle="tooltip" data-placement="top" title="Request details"><button type="button" class="btn btn-info" >Details</button></a>`;
-            //    },
-            //    "orderable": false
-            //}
+            {
+                "data": "",
+                "render": function (data, type, row, meta) {
+                    return `<a href="../Approval/${row['reimId']}" data-toggle="tooltip" data-placement="top" title="Request details"><button type="button" class="btn btn-info" >Details</button></a>`;
+                },
+                "orderable": false
+            }
         ]
     });
 })
