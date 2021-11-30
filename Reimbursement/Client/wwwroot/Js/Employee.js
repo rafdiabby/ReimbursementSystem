@@ -135,18 +135,18 @@
         }
     });
 
-    $("#nik").keypress(function (data) {
-        if (data.which != 8 && data.which != 0 && (data.which < 48 || data.which > 57)) {
-            $('#nik').addClass('is-invalid');
-            $("#pesanNik").html("Nik Harus Berupa Angka !!!").show();
-            return false;
-        }
-        else {
-            $('#nik').css('border-color', 'Green');
-            $("#pesanNik").hide();
-            return true;
-        }
-    });
+    //$("#nik").keypress(function (data) {
+    //    if (data.which != 8 && data.which != 0 && (data.which < 48 || data.which > 57)) {
+    //        $('#nik').addClass('is-invalid');
+    //        $("#pesanNik").html("Nik Harus Berupa Angka !!!").show();
+    //        return false;
+    //    }
+    //    else {
+    //        $('#nik').css('border-color', 'Green');
+    //        $("#pesanNik").hide();
+    //        return true;
+    //    }
+    //});
 
     $.ajax({
         url: "/Roles/GetAll",
