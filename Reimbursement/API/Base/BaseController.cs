@@ -60,9 +60,9 @@ namespace API.Base
                 var cek = repository.Insert(entity);
                 return Ok(new ResultVM { Status = HttpStatusCode.OK.ToString(), Pesan = $"Berhasil Tambah data" });
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = $"Gagal Tambah data" });
+                return NotFound(new ResultVM { Status = HttpStatusCode.NotFound.ToString(), Pesan = e.ToString() });
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using API.Base;
 using API.Models;
 using API.Repository.Data;
+using API.Services;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -19,20 +21,62 @@ namespace API.Controllers
     public class EmployeesController : BaseController<Employee, EmployeeRepository, string>
     {
         private readonly EmployeeRepository employeeRepository;
+        private readonly MailServices mailServices;
         public IConfiguration _configuration;
-        public EmployeesController(EmployeeRepository employeeRepository, IConfiguration configuration) : base(employeeRepository)
+        public EmployeesController(EmployeeRepository employeeRepository, IConfiguration configuration, MailServices mailServices) : base(employeeRepository)
         {
             this.employeeRepository = employeeRepository;
             this._configuration = configuration;
+            this.mailServices = mailServices;
         }
 
         [HttpPost]
         [Route("Register")]
         public ActionResult Register(RegisterVM registerVM)
         {
-            var cek = employeeRepository.Register(registerVM);
+            int length = 7;
+
+            // creating a StringBuilder object()
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+
+            char letter;
+
+            for (int i = 0; i < length; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+
+            var pass = str_build.ToString();
+
+            RegisterVM dataRegister = new RegisterVM()
+            {
+                NIK = registerVM.NIK,
+                firstName = registerVM.firstName,
+                lastName = registerVM.lastName,
+                email = registerVM.email,
+                phone = registerVM.phone,
+                bankAccount = registerVM.bankAccount,
+                gender = registerVM.gender,
+                Password = pass,
+                roleId = registerVM.roleId,
+            };
+            var cek = employeeRepository.Register(dataRegister);
             if (cek == 1)
             {
+                MailRequestVM mail = new MailRequestVM()
+                {
+                    ToEmail = dataRegister.email,
+                    Subject = "Registrasi Akun",
+                    Body = $"Akun berhasil di buat, silahkan Login ke aplikasi dengan password : {pass} dan lakukan perubahan password di menu setting :)",
+                    Attachments = null
+                };
+
+                _ = mailServices.SendEmailAsync(mail);
+
                 return Ok(new ResultVM { Status = (HttpStatusCode.OK).ToString(), Pesan = "1" });
             }
             if (cek == 2)
