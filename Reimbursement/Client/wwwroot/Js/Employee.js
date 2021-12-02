@@ -318,7 +318,7 @@ function Insert() {
         dataType: "json"
     }).done((result) => {
         if (result.pesan == "1") {
-            swal("Good job!", "You clicked the button!", {
+            swal("Good job!", "Employee has been registered!", {
                 icon: "success",
                 buttons: {
                     confirm: {

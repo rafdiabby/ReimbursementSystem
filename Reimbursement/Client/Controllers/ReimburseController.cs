@@ -38,12 +38,14 @@ namespace Client.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "HR")]
         [Route("Approval/{reimId}")]
         public IActionResult Approval(int reimId)
         {
             var data = new RequestReimVM { reimId = reimId };
             return View(data);
         }
+        [Authorize(Roles = "Finance")]
         [Route("Finance/Approval/{reimId}")]
         public IActionResult FinanceApproval(int reimId)
         {
@@ -122,5 +124,14 @@ namespace Client.Controllers
             var result = repository.UpdateStatus(reimbursement);
             return Json(result);
         }
+
+        [HttpPost]
+        public ActionResult<Reimbursement> UpdateStatusHistories(StatusHistory statusHistory)
+        {
+            statusHistory.date =DateTime.Now;
+            var result = repository.UpdateStatusHistory(statusHistory);
+            return Json(result);
+        }
+
     }
 }
