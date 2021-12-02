@@ -151,5 +151,36 @@ namespace API.Repository.Data
                 return 1;
             }
         }
+
+        public int CheckReimburse(int Id)
+        {
+            var employeeData = context.Employees.ToList();
+            var reimData = context.Reimbursements.ToList();
+            var statusData = context.Statuses.ToList();
+            var categoryData = context.Categories.ToList();
+
+            var data = from e in employeeData
+                       join r in reimData on e.NIK equals r.NIK into table0
+
+                       from r in table0.ToList()
+                       join s in statusData on r.statusId equals s.id
+                       join c in categoryData on r.categoryId equals c.id into table1
+
+                       from c in table1
+                       where r.id == Id
+                       where r.statusId== 4
+                       select new 
+                       {
+                           reimId = r.id,
+                           status = 1,
+                           
+                       };
+            int hasil = 0;
+            if (data.Count()>0)
+            {
+                hasil = 1;
+            }
+            return hasil;
+        }
     }
 }

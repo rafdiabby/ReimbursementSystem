@@ -98,6 +98,10 @@ namespace Client
                 {
                     response.Redirect("/Login/ErrorNotFound");
                 }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
+                {
+                    response.Redirect("/Login/Error401");
+                }
             });
 
             app.UseSession();

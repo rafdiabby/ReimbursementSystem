@@ -33,7 +33,7 @@ $(document).ready(function () {
                 title: 'Employee',
                 sheetName: 'Employee',
                 text: '',
-                className: 'btn fa fa-download hidden',
+                className: 'fa fa-download btn-default hidden',
                 filename: 'Data',
                 autoFilter: true,
                 exportOptions: {
@@ -41,10 +41,16 @@ $(document).ready(function () {
                 }
             }
         ],
-        //drawCallback: function () {
-        //    $('.hidden')[0].style.visibility = 'hidden'
-        //},
+        drawCallback: function () {
+            $('.hidden')[0].style.visibility = 'hidden'
+            $('.dt-buttons')[0].style.visibility = 'hidden'
+        },
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         'columns': [
+            {
+                "data": "reimId"
+            },
+
             {
                 "data": "nik"
             },
@@ -78,7 +84,8 @@ $(document).ready(function () {
                 }
             },
             {
-                "data": "statusDetails"
+                "data": "statusDetails",
+                "orderable": false
             },
             //{
             //    "data": "",
@@ -89,10 +96,15 @@ $(document).ready(function () {
             //}
         ]
     });
+
 })
 
 //excel export button
+$("#exportExcel").on('click', function (e) {
+    ExportExcel();
+});
+//excel export button
 function ExportExcel() {
-    var table = $('#employeeData').DataTable();
-    table.buttons('excel:name').trigger();
+    var table = $('#reimData').DataTable();
+    table.buttons('.buttons-excel').trigger();
 }

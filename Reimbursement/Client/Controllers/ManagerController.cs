@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "HR")]
     public class ManagerController : Controller
     {
         public IActionResult Index()

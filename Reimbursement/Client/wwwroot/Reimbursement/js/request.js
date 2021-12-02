@@ -23,6 +23,41 @@ $("#submitReq").click(function () {
     })
 })
 
+$("#request").validate({
+    rules: {
+        "nik": {
+            required: true
+        },
+        "categoryId": {
+            required: true
+        },
+        "description": {
+            required: true
+        },
+        "Amount": {
+            required: true
+        },
+        "receiptFile": {
+            required: true
+        },
+        errorPlacement: function (error, element) { },
+        highlight: function (element) {
+            $(element).closest('.form-control').addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-control').removeClass('is-invalid');
+            $(element).closest('.form-control').addClass('is-valid ');
+        }
+    }
+});
+$('#submitReq').click(function (e) {
+    e.preventDefault();
+    if ($("#EmployeeForm").valid() == true) {
+        console.log("valid")
+    }
+    else {console.log("ga valid")}
+});
+
 //biar menu ke highlight
 var dashboard = document.getElementById("Dashboard")
 dashboard.classList.remove("active")

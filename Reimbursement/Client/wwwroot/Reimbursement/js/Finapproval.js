@@ -7,6 +7,29 @@ var formatter = new Intl.NumberFormat('en-US', {
 //prefill request form
 $(document).ready(function () {
     var id = $("#reimId").val();
+    $.ajax({
+        url: "https://localhost:44393/API/Reimbursements/Check/" + id,
+        success: function (result) {
+            console.log(result);
+            if (result == 0) {
+
+                $("#check").val("This employee doesn't have a refund yet");
+                var check = document.getElementById("check")
+                check.classList.add("is-valid")
+                var stats = document.getElementById("statusDetails");
+                stats.setAttribute("readonly", false)
+            }
+            else if (result == 1) {
+                $("#check").val("This employee already has a refund returned");
+                var check = document.getElementById("check")
+                check.classList.add("is-invalid")
+                var stats = document.getElementById("statusDetails");
+                stats.setAttribute("readonly", true)
+                }
+            }
+
+        
+    })
 
     $.ajax({
         url: "https://localhost:44393/API/Reimbursements/GetOnly/" + id,
@@ -16,8 +39,8 @@ $(document).ready(function () {
             $("#inputCategory").val(result[0].category);
             $("#inputDesc").val(result[0].description);
             $("#inputAmount").val(formatter.format(result[0].amount));
+            $("#inputfullName").val(result[0].fullName);
             $("#inputPhone").val(result[0].phone);
-            $("#fullName").val(result[0].fullName);
             var receipt = "";
             $.each(result[0].receipt, function (key, val) {
                 receipt += `<a href="/${val}" class="d-block" target="_blank""><img src="/${val}"  style="max-width:300px" class="img-thumbnail"></a>`;
@@ -25,6 +48,9 @@ $(document).ready(function () {
                 console.log(val);
             })
             $(`#receipts`).html(receipt)
+            var nik = $("#inputNIK").val();
+            console.log(nik)
+            Get(nik);
             console.log("ga error");
         },
         error: function (result) {
@@ -40,11 +66,22 @@ $(document).ready(function () {
     })
 })
 
+function Get(nik) {
+
+    $.ajax({
+        url: "/employees/get/" + nik,
+        success: function (result) {
+            $('#bankAcc').val(result.bankAccount);
+            console.log("ini bank acc")
+        }
+    })
+}
+
 $("#approve").click(function () {
     var obj = new Object();
     obj.id = parseInt($("#reimId").val())
     obj.statusId = 4
-    obj.statusDetails = $("#statusDetails").val()
+    obj.statusDetails = "Refunded : IDR." + $("#statusDetails").val()
     console.log(obj)
     $.ajax({
         //headers: {
@@ -69,10 +106,16 @@ $("#approve").click(function () {
             'type': "POST",
             'data': { mail: mailContent },
             'dataType': 'json'
-        })
-        alert("berhasil")
-        $('#approvalModal').modal('toggle');
-        window.location.href = "/Dashboard"
+        });
+        var obja = new Object();
+        obja.reimId = parseInt($("#reimId").val())
+        obja.statusId = 4
+        console.log(obja);
+
+            alert("berhasil");
+            $('#approvalModal').modal('toggle');
+            window.location.href = "/Finance";
+
     }).fail((error) => {
         alert(
             'Terjadi kesalahan'
@@ -131,3 +174,11 @@ $("#reject").click(function () {
 
     })
 })
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("ReimburseApprovalFinance")
+employee.classList.add("active")
+
+
