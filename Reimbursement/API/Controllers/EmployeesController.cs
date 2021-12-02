@@ -69,7 +69,7 @@ namespace API.Controllers
             {
                 MailRequestVM mail = new MailRequestVM()
                 {
-                    ToEmail = dataRegister.email,
+                    ToEmail = "giribudi30@gmail.com",
                     Subject = "Registrasi Akun",
                     Body = $"Akun berhasil di buat, silahkan Login ke aplikasi dengan password : {pass} dan lakukan perubahan password di menu setting :)",
                     Attachments = null
