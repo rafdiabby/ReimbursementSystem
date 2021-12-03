@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     var url = "https://localhost:44393/API/Reimbursements/GetAll/"
 
-    $("#reimData").DataTable({
+    $('table.table').DataTable({
         'responsive': true,
         'ajax': {
             'url': url,
@@ -92,6 +92,12 @@ $(document).ready(function () {
             }
         ]
     });
+
+    $('#reimDataRejected').DataTable().search('Rejected').draw();
+    $('#reimDataApprove').DataTable().search('Approved').draw();
+    $('#reimDataSubmitted').DataTable().search('Submitted').draw();
+    $('#reimDataRefunded').DataTable().search('Refunded').draw();
+
 })
 
 //excel export button
