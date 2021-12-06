@@ -152,7 +152,7 @@ namespace API.Repository.Data
             }
         }
 
-        public int CheckReimburse(int Id)
+        public int CheckReimburse(string Id)
         {
             var employeeData = context.Employees.ToList();
             var reimData = context.Reimbursements.ToList();
@@ -167,7 +167,7 @@ namespace API.Repository.Data
                        join c in categoryData on r.categoryId equals c.id into table1
 
                        from c in table1
-                       where r.id == Id
+                       where e.NIK == Id
                        where r.statusId== 4
                        select new 
                        {

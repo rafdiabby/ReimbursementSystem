@@ -40,6 +40,7 @@ namespace Client
 
             services.AddScoped<ReimburseRepository>();
             services.AddScoped<MailRepository>();
+            services.AddScoped<CategoryRepository>();
 
 
             services.AddControllersWithViews();

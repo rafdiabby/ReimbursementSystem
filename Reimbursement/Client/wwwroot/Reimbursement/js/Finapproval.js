@@ -8,33 +8,8 @@ var formatter = new Intl.NumberFormat('en-US', {
 $(document).ready(function () {
     var id = $("#reimId").val();
     $.ajax({
-        url: "https://localhost:44393/API/Reimbursements/Check/" + id,
-        success: function (result) {
-            console.log(result);
-            if (result == 0) {
-
-                $("#check").val("This employee doesn't have a refund yet");
-                var check = document.getElementById("check")
-                check.classList.add("is-valid")
-                var stats = document.getElementById("statusDetails");
-                stats.setAttribute("readonly", false)
-            }
-            else if (result == 1) {
-                $("#check").val("This employee already has a refund returned");
-                var check = document.getElementById("check")
-                check.classList.add("is-invalid")
-                var stats = document.getElementById("statusDetails");
-                stats.setAttribute("readonly", true)
-                }
-            }
-
-        
-    })
-
-    $.ajax({
         url: "https://localhost:44393/API/Reimbursements/GetOnly/" + id,
         success: function (result) {
-            console.log(result);
             $("#inputNIK").val(result[0].nik);
             $("#inputCategory").val(result[0].category);
             $("#inputDesc").val(result[0].description);
@@ -44,14 +19,52 @@ $(document).ready(function () {
             var receipt = "";
             $.each(result[0].receipt, function (key, val) {
                 receipt += `<a href="/${val}" class="d-block" target="_blank""><img src="/${val}"  style="max-width:300px" class="img-thumbnail"></a>`;
-                console.log(receipt);
-                console.log(val);
             })
             $(`#receipts`).html(receipt)
             var nik = $("#inputNIK").val();
             console.log(nik)
             Get(nik);
             console.log("ga error");
+
+            var nik = $("#inputNIK").val();
+            console.log("input NIK nya adalah");
+            console.log(nik)
+            $.ajax({
+                url: "https://localhost:44393/API/Reimbursements/Check/" + nik,
+                success: function (result) {
+                    console.log(result);
+                    if (result == 0) {
+
+                        $("#check").val("This employee doesn't have a refund yet");
+                        var check = document.getElementById("check")
+                        check.classList.add("text-success")
+                        var stats = document.getElementById("statusDetails");
+                        stats.removeAttribute("readonly")
+                    }
+                    else if (result == 1) {
+                        $("#check").val("This employee already has a refund returned");
+                        var check = document.getElementById("check")
+                        check.classList.add("text-danger")
+                        var stats = document.getElementById("statusDetails");
+                        stats.setAttribute("readonly", true)
+                    }
+                }
+            })
+
+            $.ajax({
+                url: "/Category/Getall/",
+                success: function (result) {
+                    var cat = $('#categoryId').val();
+                    $.each(result, function (key, val) {
+                        if (result.categoryName == cat) {
+                            $('#maxValue').val(formatter.format(val.maxValue))
+                        }
+                        else {
+
+                        }
+                    })
+                }
+            })
         },
         error: function (result) {
             var content = `<h1>Error : Reimbursement ID Not Found</h1>`;
@@ -64,6 +77,8 @@ $(document).ready(function () {
 
         }
     })
+
+    
 })
 
 function Get(nik) {

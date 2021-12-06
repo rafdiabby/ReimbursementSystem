@@ -64,3 +64,25 @@ dashboard.classList.remove("active")
 var reimburse = document.getElementById("Reimburse")
 reimburse.classList.add("active")
 console.log("yhaa")
+
+$("#haaa").click(function (e) {
+
+    //nanti ini ditaro di sebelum ajax submit atau sebelum ngasih command submit form
+    Swal.fire({
+        title: 'Please wait..',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading(false)
+        }
+    })
+
+    //ini ditaro setelah command submit form atau ajax success
+    Swal.close()
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Your request has been submitted',
+        didOpen: () => { Swal.hideLoading()}
+    })
+    
+})

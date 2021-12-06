@@ -82,7 +82,7 @@ namespace API.Controllers
         }
         [Route("Check/{id}")]
         [HttpGet]
-        public IActionResult Check(int id)
+        public IActionResult Check(string id)
         {
             return Ok(reimbursementRepository.CheckReimburse(id));
         }
