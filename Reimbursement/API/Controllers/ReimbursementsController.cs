@@ -80,5 +80,11 @@ namespace API.Controllers
         {
             return Ok(reimbursementRepository.LastId());
         }
+        [Route("Check/{id}")]
+        [HttpGet]
+        public IActionResult Check(string id)
+        {
+            return Ok(reimbursementRepository.CheckReimburse(id));
+        }
     }
 }

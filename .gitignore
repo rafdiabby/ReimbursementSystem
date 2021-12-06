@@ -13,3 +13,5 @@ Reimbursement/API/appsettings.Development.json
 Reimbursement/.vs/Reimbursement/v16/.suo
 
 
+*.json
+*.jpeg

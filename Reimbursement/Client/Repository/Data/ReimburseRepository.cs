@@ -57,5 +57,11 @@ namespace Client.Repository.Data
             var result = httpClient.PatchAsync(address.link + request+ "UpdateStatus", content).Result;
             return result.StatusCode;
         }
+        public HttpStatusCode UpdateStatusHistory(StatusHistory statusHistory)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(statusHistory), Encoding.UTF8, "application/json");
+            var result = httpClient.PatchAsync(address.link + "StatusHistories", content).Result;
+            return result.StatusCode;
+        }
     }
 }

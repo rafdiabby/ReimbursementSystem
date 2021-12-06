@@ -30,21 +30,26 @@ $(document).ready(function () {
             {
                 extend: 'excelHtml5',
                 name: 'excel',
-                title: 'Employee',
-                sheetName: 'Employee',
+                title: 'Reimbursement',
+                sheetName: 'Reimbursement',
                 text: '',
-                className: 'btn fa fa-download hidden',
-                filename: 'Data',
+                className: 'fa fa-download btn-default hidden',
+                filename: 'Reimbursement',
                 autoFilter: true,
                 exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [0, 1, 2, 3,4,5,6]
                 }
             }
         ],
-        //drawCallback: function () {
-        //    $('.hidden')[0].style.visibility = 'hidden'
-        //},
+        drawCallback: function () {
+            $('.hidden')[0].style.visibility = 'hidden'
+            $('.dt-buttons')[0].style.visibility = 'hidden'
+        },
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         'columns': [
+            {
+                "data": "reimId"
+            },
             {
                 "data": "nik"
             },
@@ -89,10 +94,26 @@ $(document).ready(function () {
             }
         ]
     });
+    $('body').tooltip({
+        selector: "[data-tooltip=tooltip]",
+        container: "body"
+    });
+    tabel.on('draw', function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+    
 })
-
+$("#exportExcel").on('click', function (e) {
+    ExportExcel();
+});
 //excel export button
 function ExportExcel() {
-    var table = $('#employeeData').DataTable();
-    table.buttons('excel:name').trigger();
+    var table = $('#reimData').DataTable();
+    table.buttons('.buttons-excel').trigger();
 }
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("ReimburseApprovalHR")
+employee.classList.add("active")

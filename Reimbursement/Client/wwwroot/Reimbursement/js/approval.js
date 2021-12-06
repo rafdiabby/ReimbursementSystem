@@ -17,7 +17,7 @@ $(document).ready(function () {
             $("#inputDesc").val(result[0].description);
             $("#inputAmount").val(formatter.format(result[0].amount));
             $("#inputPhone").val(result[0].phone);
-            $("#fullName").val(result[0].fullName);
+            $("#inputfullName").val(result[0].fullName);
             var receipt = "";
             $.each(result[0].receipt, function (key, val) {
                 receipt += `<a href="/${val}" class="d-block" target="_blank""><img src="/${val}"  style="max-width:300px" class="img-thumbnail"></a>`;
@@ -131,3 +131,9 @@ $("#reject").click(function () {
 
     })
 })
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("ReimburseApprovalHR")
+employee.classList.add("active")

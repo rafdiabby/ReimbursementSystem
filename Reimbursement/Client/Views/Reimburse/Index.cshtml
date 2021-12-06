@@ -16,13 +16,20 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Request Reimbursement Form</div>
+                <div class="card-head-row">
+                    <div class="card-title">Request Reimbursement Form</div>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#helpModal">
+                        Need Help?</button>
+                        <button type="button" id="haaa" class="btn btn-danger">Ha</button>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div id="registerForm container" class="modal-body">
 
                     @model RequestReimVM
-                    <form id="request" class="needs-validation user" name="rquest" asp-controller="Reimburse" asp-action="CreateForm" enctype="multipart/form-data" novalidate>
+                    <form id="request" class="needs-validation user" name="rquest" asp-controller="Reimburse" asp-action="CreateForm" enctype="multipart/form-data">
                         <div class="form-group" hidden>
                             <label for="isEdit">Is Edit?</label>
                             <input type="text" class="form-control" id="isEdit">
@@ -41,8 +48,8 @@
                                     <select class="form-control" id="inputCategory" name="categoryId" required>
                                         <option value="">Select one</option>
                                         <option value="1">Airplane Ticket</option>
-                                        <option value="3">Land Transport</option>
-                                        <option value="4">Airplane and Land Transport</option>
+                                        <option value="2">Land Transport</option>
+                                        <option value="3">Airplane and Land Transport</option>
                                     </select>
                                     </div>
                                 </div>
@@ -76,8 +83,64 @@
                 <a type="button" href="Dashboard" class="btn btn-secondary">Cancel</a>
                 <button type="submit" id="submitReq" form="request" class="btn btn-primary">Submit request</button>
             </div>
-    </div></div></div>>
+    </div></div></div>
+
+<!-- Modal Help -->
+<div class="modal  fade" id="helpModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="helpModalTitle">Instruction for Filling Reimbursement Form</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Instructions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NIK</td>
+                            <td>This is your employee number. NIK is prefilled automatically, so you doesn't need to fill it</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>Choose your reimbursement type. If you want to reimburse airplane ticket, choose "Airplane Ticket" option,
+                                if you want to reimburse bus and/or train ticket, choose "Land Transport" option, etc
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Descriptions</td>
+                            <td>Describe what you want to reimburse. Ex : Airplane Ticket PP Jakarta-Manokwari Garuda Air</td>
+                        </tr>
+                        <tr>
+                            <td>Amounts</td>
+                            <td>Write the amount you want to be reimbursed</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Receipts</td>
+                            <td>Upload your proof of transactions like tickets, receipt, proof of payment. Uploaded files must be original files with jpeg/png format</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @section scripts{
     <script src="~/Reimbursement/js/request.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

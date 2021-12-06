@@ -7,25 +7,64 @@ var formatter = new Intl.NumberFormat('en-US', {
 //prefill request form
 $(document).ready(function () {
     var id = $("#reimId").val();
-
     $.ajax({
         url: "https://localhost:44393/API/Reimbursements/GetOnly/" + id,
         success: function (result) {
-            console.log(result);
             $("#inputNIK").val(result[0].nik);
             $("#inputCategory").val(result[0].category);
             $("#inputDesc").val(result[0].description);
             $("#inputAmount").val(formatter.format(result[0].amount));
+            $("#inputfullName").val(result[0].fullName);
             $("#inputPhone").val(result[0].phone);
-            $("#fullName").val(result[0].fullName);
             var receipt = "";
             $.each(result[0].receipt, function (key, val) {
                 receipt += `<a href="/${val}" class="d-block" target="_blank""><img src="/${val}"  style="max-width:300px" class="img-thumbnail"></a>`;
-                console.log(receipt);
-                console.log(val);
             })
             $(`#receipts`).html(receipt)
+            var nik = $("#inputNIK").val();
+            console.log(nik)
+            Get(nik);
             console.log("ga error");
+
+            var nik = $("#inputNIK").val();
+            console.log("input NIK nya adalah");
+            console.log(nik)
+            $.ajax({
+                url: "https://localhost:44393/API/Reimbursements/Check/" + nik,
+                success: function (result) {
+                    console.log(result);
+                    if (result == 0) {
+
+                        $("#check").val("This employee doesn't have a refund yet");
+                        var check = document.getElementById("check")
+                        check.classList.add("text-success")
+                        var stats = document.getElementById("statusDetails");
+                        stats.removeAttribute("readonly")
+                    }
+                    else if (result == 1) {
+                        $("#check").val("This employee already has a refund returned");
+                        var check = document.getElementById("check")
+                        check.classList.add("text-danger")
+                        var stats = document.getElementById("statusDetails");
+                        stats.setAttribute("readonly", true)
+                    }
+                }
+            })
+
+            $.ajax({
+                url: "/Category/Getall/",
+                success: function (result) {
+                    var cat = $('#categoryId').val();
+                    $.each(result, function (key, val) {
+                        if (result.categoryName == cat) {
+                            $('#maxValue').val(formatter.format(val.maxValue))
+                        }
+                        else {
+
+                        }
+                    })
+                }
+            })
         },
         error: function (result) {
             var content = `<h1>Error : Reimbursement ID Not Found</h1>`;
@@ -38,13 +77,26 @@ $(document).ready(function () {
 
         }
     })
+
+    
 })
+
+function Get(nik) {
+
+    $.ajax({
+        url: "/employees/get/" + nik,
+        success: function (result) {
+            $('#bankAcc').val(result.bankAccount);
+            console.log("ini bank acc")
+        }
+    })
+}
 
 $("#approve").click(function () {
     var obj = new Object();
     obj.id = parseInt($("#reimId").val())
     obj.statusId = 4
-    obj.statusDetails = $("#statusDetails").val()
+    obj.statusDetails = "Refunded : IDR." + $("#statusDetails").val()
     console.log(obj)
     $.ajax({
         //headers: {
@@ -69,10 +121,16 @@ $("#approve").click(function () {
             'type': "POST",
             'data': { mail: mailContent },
             'dataType': 'json'
-        })
-        alert("berhasil")
-        $('#approvalModal').modal('toggle');
-        window.location.href = "/Dashboard"
+        });
+        var obja = new Object();
+        obja.reimId = parseInt($("#reimId").val())
+        obja.statusId = 4
+        console.log(obja);
+
+            alert("berhasil");
+            $('#approvalModal').modal('toggle');
+            window.location.href = "/Finance";
+
     }).fail((error) => {
         alert(
             'Terjadi kesalahan'
@@ -131,3 +189,11 @@ $("#reject").click(function () {
 
     })
 })
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("ReimburseApprovalFinance")
+employee.classList.add("active")
+
+

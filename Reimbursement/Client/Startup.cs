@@ -40,6 +40,7 @@ namespace Client
 
             services.AddScoped<ReimburseRepository>();
             services.AddScoped<MailRepository>();
+            services.AddScoped<CategoryRepository>();
 
 
             services.AddControllersWithViews();
@@ -97,6 +98,10 @@ namespace Client
                 else if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
                 {
                     response.Redirect("/Login/ErrorNotFound");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
+                {
+                    response.Redirect("/Login/Error401");
                 }
             });
 

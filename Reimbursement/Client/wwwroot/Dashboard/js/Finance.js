@@ -30,10 +30,10 @@ $(document).ready(function () {
             {
                 extend: 'excelHtml5',
                 name: 'excel',
-                title: 'Employee',
-                sheetName: 'Employee',
+                title: 'Reimburse',
+                sheetName: 'Reimburse',
                 text: '',
-                className: 'btn fa fa-download hidden',
+                className: 'fa fa-download btn-default hidden',
                 filename: 'Data',
                 autoFilter: true,
                 exportOptions: {
@@ -41,10 +41,13 @@ $(document).ready(function () {
                 }
             }
         ],
-        //drawCallback: function () {
-        //    $('.hidden')[0].style.visibility = 'hidden'
-        //},
+        drawCallback: function () {
+            $('.hidden')[0].style.visibility = 'hidden'
+        },
         'columns': [
+            {
+                "data": "reimId"
+            },
             {
                 "data": "nik"
             },
@@ -83,7 +86,7 @@ $(document).ready(function () {
             {
                 "data": "",
                 "render": function (data, type, row, meta) {
-                    return `<a href="Finance/Approval/${row['reimId']}" data-toggle="tooltip" data-placement="top" title="Request details"><button type="button" class="btn btn-info" >Details</button></a>`;
+                    return `<a href="/Finance/Approval/${row['reimId']}" data-toggle="tooltip" data-placement="top" title="Request details"><button type="button" class="btn btn-info" >Details</button></a>`;
                 },
                 "orderable": false
             }
@@ -96,3 +99,9 @@ function ExportExcel() {
     var table = $('#employeeData').DataTable();
     table.buttons('excel:name').trigger();
 }
+
+//biar menu ke highlight
+var dashboard = document.getElementById("Dashboard")
+dashboard.classList.remove("active")
+var employee = document.getElementById("ReimburseApprovalFinance")
+employee.classList.add("active")

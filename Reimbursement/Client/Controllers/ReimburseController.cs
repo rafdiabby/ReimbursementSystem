@@ -38,12 +38,14 @@ namespace Client.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "HR")]
         [Route("Approval/{reimId}")]
         public IActionResult Approval(int reimId)
         {
             var data = new RequestReimVM { reimId = reimId };
             return View(data);
         }
+        [Authorize(Roles = "Finance")]
         [Route("Finance/Approval/{reimId}")]
         public IActionResult FinanceApproval(int reimId)
         {
@@ -100,7 +102,7 @@ namespace Client.Controllers
             }
             var mailContent = new MailRequestVM
             {
-                ToEmail = "sujitolyoko626@gmail.com",
+                ToEmail = "giribudi30@gmail.com",
                 Subject = "New Reimbursement Request",
                 Body = "Your employee with NIK : " + data.NIK + " has new reimbursement request waiting for approval, check on website for additional details"
             };
@@ -122,5 +124,14 @@ namespace Client.Controllers
             var result = repository.UpdateStatus(reimbursement);
             return Json(result);
         }
+
+        [HttpPost]
+        public ActionResult<Reimbursement> UpdateStatusHistories(StatusHistory statusHistory)
+        {
+            statusHistory.date =DateTime.Now;
+            var result = repository.UpdateStatusHistory(statusHistory);
+            return Json(result);
+        }
+
     }
 }
