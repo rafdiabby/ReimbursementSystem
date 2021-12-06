@@ -8193,17 +8193,18 @@ h1, h2, h3, h4, h5,
       width: 100%; } }
 
 .text-wrap {
-  background: #f75959;
-  background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
-  background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-  background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-  background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 );
-  color: #fff; }
+    background: #f75959;
+    background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
+    background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+    background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+    background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+    background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+    background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+    background: linear-gradient(135deg, #01BFD9 0%, #008BF0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 );
+    color: #fff;
+}
   .text-wrap .text h2 {
     font-weight: 900;
     color: #fff; }
@@ -8335,9 +8336,11 @@ h1, h2, h3, h4, h5,
 
 /* Style the checkmark/indicator */
 .checkbox-primary {
-  color: #f35588; }
-  .checkbox-primary input:checked ~ .checkmark:after {
-    color: #f35588; }
+    color: #01BFD9;
+}
+    .checkbox-primary input:checked ~ .checkmark:after {
+        color: #01BFD9;
+    }
 
 .btn {
   cursor: pointer;
@@ -8348,24 +8351,26 @@ h1, h2, h3, h4, h5,
   border-radius: 50px; }
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
-  .btn.btn-primary {
-    background: #f35588;
-    border: 1px solid #f35588;
-    color: #fff;
-    background: #f75959;
-    background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
-    background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-    background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-    background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 ); }
-    .btn.btn-primary:hover {
-      border: 1px solid #f35588;
-      background: #f35588;
-      color: #fff; }
+    .btn.btn-primary {
+        background: #f35588;
+        border: 1px solid #01BFD9;
+        color: #fff;
+        background: #f75959;
+        background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+        background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
+        background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+        background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+        background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+        background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+        background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+        background: linear-gradient(135deg, #01BFD9 0%, #008BF0 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 );
+    }
+        .btn.btn-primary:hover {
+            border: 1px solid #01BFD9;
+            background: #01BFD9;
+            color: #fff;
+        }
     .btn.btn-primary.btn-outline-primary {
       border: 1px solid #f35588;
       background: transparent;
