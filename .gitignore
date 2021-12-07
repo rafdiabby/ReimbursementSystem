@@ -15,3 +15,4 @@ Reimbursement/.vs/Reimbursement/v16/.suo
 
 *.json
 *.jpeg
+/Reimbursement/Client/wwwroot/uploads
